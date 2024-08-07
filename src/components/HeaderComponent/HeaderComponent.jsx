@@ -3,6 +3,7 @@ import React from "react";
 import { WrapperHeader, WrapperTextHeader, WrapperHeaderAccout, WrapperTextHeaderSmall } from "./style";
 import Search from "antd/es/transfer/search";
 import { UserOutlined, CaretDownOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
 
 const HeaderComponent = () => {
     return (
@@ -12,11 +13,13 @@ const HeaderComponent = () => {
                     <WrapperTextHeader>TiKi</WrapperTextHeader>
                 </Col>
                 <Col span={12}>
-                    <Search
-                        placeholder="input search text"
-                        enterButton />
+                    <ButtonInputSearch
+                        size="large"
+                        textButton="Tìm kiếm"
+                        placeholder="Bạn đang tìm gì?"
+                    />
                 </Col>
-                <Col span={6} style={{ display: 'flex', gap: '20px', paddingLeft: '20px' }}>
+                <Col span={6} style={{ display: 'flex', gap: '20px', paddingLeft: '20px', alignItems: 'center'}}>
                     <WrapperHeaderAccout>
                         <UserOutlined style={{ fontSize: '30px' }} />
                         <div>
@@ -37,4 +40,4 @@ const HeaderComponent = () => {
     );
 };
 
-export default HeaderComponent;
+export default HeaderComponent
