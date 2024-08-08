@@ -1,0 +1,10 @@
+import styled from "styled-components";
+
+export const WrapperTypeProduct = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    justify-content: flex-start;
+    border: 1px solid #ddd;
+    height: 44px;
+`

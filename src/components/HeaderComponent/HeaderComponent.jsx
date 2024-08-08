@@ -1,9 +1,9 @@
 import { Col } from "antd";
 import React from "react";
 import { WrapperHeader, WrapperTextHeader, WrapperHeaderAccout, WrapperTextHeaderSmall } from "./style";
-import Search from "antd/es/transfer/search";
 import { UserOutlined, CaretDownOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
+
 
 const HeaderComponent = () => {
     return (
