@@ -6,6 +6,7 @@ import slider2 from '../../assets/images/slider2.webp';
 import slider3 from '../../assets/images/slider3.webp';
 import SliderComponent from "../../components/SliderComponent/SliderComponent";
 import CardComponent from "../../components/CardComponent/CardComponent";
+import NavBarComponent from "../../components/NavBarComponent/NavBarComponent";
 
 const HomePage = () => {
     const arr = ['TiVi', 'Điện thoại', 'Laptop', 'Phụ kiện', 'Tai nghe']
@@ -20,11 +21,12 @@ const HomePage = () => {
                     })}
                 </WrapperTypeProduct>
             </div>
-            <div id="container" style={{ backgroundColor: '#efefef', padding: '0 120px', height: '1000px' }}>
+            <div id="container" style={{ backgroundColor: '#efefef', padding: '0 120px', height: '100%' }}>
                 <SliderComponent arrImages={[slider1, slider2, slider3]} />
                 <div style={{marginTop: '20px', display: 'flex', alignItems: 'center', gap: '20px'}}>
                     <CardComponent />
                 </div>
+                <NavBarComponent />
             </div>
         </>
     );
