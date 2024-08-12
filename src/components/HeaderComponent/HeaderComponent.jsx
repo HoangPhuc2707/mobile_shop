@@ -1,4 +1,4 @@
-import { Col } from "antd";
+import { Badge, Col } from "antd";
 import React from "react";
 import { WrapperHeader, WrapperTextHeader, WrapperHeaderAccout, WrapperTextHeaderSmall } from "./style";
 import { UserOutlined, CaretDownOutlined, ShoppingCartOutlined } from '@ant-design/icons';
@@ -19,7 +19,7 @@ const HeaderComponent = () => {
                         placeholder="Bạn đang tìm gì?"
                     />
                 </Col>
-                <Col span={6} style={{ display: 'flex', gap: '20px', paddingLeft: '20px', alignItems: 'center'}}>
+                <Col span={6} style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
                     <WrapperHeaderAccout>
                         <UserOutlined style={{ fontSize: '30px' }} />
                         <div>
@@ -30,8 +30,10 @@ const HeaderComponent = () => {
                             </div>
                         </div>
                     </WrapperHeaderAccout>
-                    <div>
-                        <ShoppingCartOutlined style={{ fontSize: '30px', color: '#fff' }} />
+                    <div style={{ display: 'flex'}}>
+                        <Badge count={4} size="small">
+                            <ShoppingCartOutlined style={{ fontSize: '30px', color: '#fff' }} />
+                        </Badge>
                         <WrapperTextHeaderSmall>Giỏ hàng</WrapperTextHeaderSmall>
                     </div>
                 </Col>
