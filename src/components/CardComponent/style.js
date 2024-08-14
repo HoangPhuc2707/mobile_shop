@@ -11,7 +11,6 @@ export const WrapperCardStyle = styled(Card)`
     .ant-card-body{
         padding-left: 10px;
         padding-top: 20px;
-
     }
 `
 
@@ -41,4 +40,10 @@ export const WrapperDiscountText = styled.span`
     font-size: 12px;
     font-weight: 500;
     margin-left: 4px;
+`
+
+export const WrapperStyleTextSell = styled.span`
+    font-size: 12px;
+    line-height: 24px;
+    color: rgb(120, 120, 120)
 `
