@@ -6,12 +6,22 @@ import imageLogin from "../../assets/images/logo-login.png";
 import { Image } from "antd";
 import { EyeFilled, EyeInvisibleFilled } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
+import * as UserService from '../../services/UserService';
+import { useMutationHooks } from "../../hooks/useMutationHook";
+import Loading from "../../components/LoadingComponent/Loading";
 
 const SignInPage = () => {
     const navigate = useNavigate()
     const [isShowPassword, setIsShowPassword] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const mutation = useMutationHooks(
+        data => UserService.loginUser(data)
+    )
+    const { data, isPending } = mutation
+
+    console.log('mutation', mutation)
 
     const handleOnchangeEmail = (value) => {
         setEmail(value)
@@ -26,6 +36,10 @@ const SignInPage = () => {
     }
 
     const handleSignIn = () => {
+        mutation.mutate({
+            email,
+            password
+        })
         console.log('sign-in', email, password)
     }
     return (
@@ -34,7 +48,7 @@ const SignInPage = () => {
                 <WrapperContainerLeft>
                     <h1>Xin chào</h1>
                     <p>Đăng nhập vào tài khoản</p>
-                    <InputForm style={{ marginBottom: '10px' }} placeholder="abc@gmail.com" value={email} onChange={handleOnchangeEmail}/>
+                    <InputForm style={{ marginBottom: '10px' }} placeholder="abc@gmail.com" value={email} onChange={handleOnchangeEmail} />
                     <div style={{ position: 'relative' }}>
                         <span
                             onClick={() => setIsShowPassword(!isShowPassword)}
@@ -59,21 +73,24 @@ const SignInPage = () => {
                             onChange={handleOnchangePassword}
                         />
                     </div>
-                    <ButtonComponent
-                        isDisabled={!email.length || !password.length}
-                        onClick={handleSignIn}
-                        size={40}
-                        styleButton={{
-                            background: 'rgb(255, 57, 69)',
-                            height: '48px',
-                            width: '100%',
-                            border: 'none',
-                            borderRadius: '4px',
-                            margin: '26px 0 10px'
-                        }}
-                        textButton={'Đăng nhập'}
-                        styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
-                    ></ButtonComponent>
+                    {data?.status === 'ERR' && <span style={{ color: 'red' }}>{data?.message}</span>}
+                    <Loading isPending={isPending}>
+                        <ButtonComponent
+                            isDisabled={!email.length || !password.length}
+                            onClick={handleSignIn}
+                            size={40}
+                            styleButton={{
+                                background: 'rgb(255, 57, 69)',
+                                height: '48px',
+                                width: '100%',
+                                border: 'none',
+                                borderRadius: '4px',
+                                margin: '26px 0 10px'
+                            }}
+                            textButton={'Đăng nhập'}
+                            styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
+                        ></ButtonComponent>
+                    </Loading>
                     <p><WrapperTextLight>Quên mật khẩu?</WrapperTextLight></p>
                     <p>Chưa có tài khoản? <WrapperTextLight onClick={handleNavigateSignUp}>Tạo tài khoản</WrapperTextLight></p>
                 </WrapperContainerLeft>
