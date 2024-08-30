@@ -1,5 +1,5 @@
 import { Badge, Col, Popover } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { WrapperHeader, WrapperTextHeader, WrapperHeaderAccout, WrapperTextHeaderSmall, WrapperContentPopover } from "./style";
 import { UserOutlined, CaretDownOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
@@ -13,9 +13,11 @@ const HeaderComponent = () => {
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
     const dispatch = useDispatch()
+    const [userName, setUserName] = useState('')
+    const [userAvatar, setUserAvatar] = useState('')
     const [pending, setPending] = useState(false)
     const handleNavigateLogin = () => {
-        navigate('sign-in')
+        navigate('/sign-in')
     }
     const handleLogout = async () => {
         setPending(true)
@@ -23,10 +25,18 @@ const HeaderComponent = () => {
         dispatch(resetUser())
         setPending(false)
     }
+
+    useEffect(() => {
+        setPending(true)
+        setUserName(user?.name)
+        setUserAvatar(user?.avatar)
+        setPending(false)
+    }, [user?.name, user?.avatar])
+
     const content = (
         <div>
             <WrapperContentPopover onClick={handleLogout}>Đăng xuất</WrapperContentPopover>
-            <WrapperContentPopover>Thông tin người dùng</WrapperContentPopover>
+            <WrapperContentPopover onClick={() => navigate('/profile-user')}>Thông tin người dùng</WrapperContentPopover>
         </div>
     );
     return (
@@ -45,11 +55,20 @@ const HeaderComponent = () => {
                 <Col span={6} style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
                     <Loading isPending={pending}>
                         <WrapperHeaderAccout>
-                            <UserOutlined style={{ fontSize: '30px' }} />
-                            {user?.name ? (
+                            {userAvatar ? (
+                                <img src={userAvatar} alt="avatar" style={{
+                                    height: '30px',
+                                    width: '30px',
+                                    borderRadius: '50%',
+                                    objectFit: 'cover'
+                                }}/>
+                            ) : (
+                                <UserOutlined style={{ fontSize: '30px' }} />
+                            )}
+                            {user?.access_token ? (
                                 <>
                                     <Popover content={content} trigger="click">
-                                        <div style={{ cursor: 'pointer' }}>{user.name}</div>
+                                        <div style={{ cursor: 'pointer', paddingTop: '5px' }}>{userName?.length ? userName : user?.email}</div>
                                     </Popover>
                                 </>
                             ) : (
