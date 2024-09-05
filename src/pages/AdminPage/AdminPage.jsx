@@ -1,7 +1,7 @@
 import { Menu } from "antd";
 import React, { useState } from "react";
 import { getItem } from '../../utils';
-import { UserOutlined, AppstoreOutlined, ShoppingCartOutlined } from '@ant-design/icons'
+import { UserOutlined, AppstoreOutlined } from '@ant-design/icons'
 import HeaderComponent from "../../components/HeaderComponent/HeaderComponent";
 import AdminUser from "../../components/AdminUser/AdminUser";
 import AdminProduct from "../../components/AdminProduct/AdminProduct";
@@ -42,7 +42,6 @@ const AdminPage = () => {
                     style={{
                         width: 256,
                         boxShadow: '1px 1px 2px #ccc',
-                        height: '100vh'
                     }}
                     items={items}
                     onClick={handleOnClick}
