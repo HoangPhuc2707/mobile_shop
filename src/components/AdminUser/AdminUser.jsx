@@ -53,6 +53,18 @@ const AdminUser = () => {
         }
     )
 
+    const mutationDeletedMany = useMutationHooks(
+        (data) => {
+            const {
+                token, ...ids } = data
+            const res = UserService.deleteManyUser(
+                ids,
+                token)
+            return res
+        }
+    )
+    
+
     const mutationDeleted = useMutationHooks(
         (data) => {
             const {
@@ -89,18 +101,27 @@ const AdminUser = () => {
     }, [form, stateUserDetails])
 
     useEffect(() => {
-        if (rowSelected) {
+        if (rowSelected && isOpenDrawer) {
             setIsPendingUpdate(true)
             fetchGetDetailsUser(rowSelected)
         }
-    }, [rowSelected])
+    }, [rowSelected, isOpenDrawer])
 
     const handleDetailsUser = () => {
         setIsOpenDrawer(true)
     }
 
+    const handleDeleteManyUsers = (ids) => {
+        mutationDeletedMany.mutate({ ids: ids, token: user?.access_token }, {
+            onSettled: () => {
+                queryUser.refetch()
+            }
+        })
+    }
+
     const { data: dataUpdated, isPending: isPendingUpdated, isSuccess: isSuccessUpdated, isError: isErrorUpdated } = mutationUpdate
     const { data: dataDeleted, isPending: isPendingDeleted, isSuccess: isSuccessDelected, isError: isErrorDeleted } = mutationDeleted
+    const { data: dataDeletedMany, isPending: isPendingDeletedMany, isSuccess: isSuccessDelectedMany, isError: isErrorDeletedMany } = mutationDeletedMany
 
     const queryUser = useQuery({ queryKey: ['users'], queryFn: getAllUser })
     const { isPending: isPendingUsers, data: users } = queryUser
@@ -229,6 +250,14 @@ const AdminUser = () => {
     })
 
     useEffect(() => {
+        if (isSuccessDelectedMany && dataDeletedMany?.status === 'OK') {
+            message.success()
+        } else if (isErrorDeletedMany) {
+            message.error()
+        }
+    }, [isSuccessDelectedMany])
+
+    useEffect(() => {
         if (isSuccessDelected && dataDeleted?.status === 'OK') {
             message.success()
             handleCancelDelete()
@@ -307,7 +336,7 @@ const AdminUser = () => {
         <div>
             <WrapperHeader>Quản lý người dùng</WrapperHeader>
             <div style={{ marginTop: '20px' }}>
-                <TableComponent columns={columns} isPending={isPendingUsers} data={dataTable} onRow={(record, rowIndex) => {
+                <TableComponent handleDeleteMany={handleDeleteManyUsers} columns={columns} isPending={isPendingUsers} data={dataTable} onRow={(record, rowIndex) => {
                     return {
                         onClick: event => {
                             setRowSelected(record._id)
