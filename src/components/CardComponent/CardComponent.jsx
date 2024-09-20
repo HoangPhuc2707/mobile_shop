@@ -9,7 +9,7 @@ const CardComponent = (props) => {
         <WrapperCardStyle
             hoverable
             style={{ width: 240 }}
-            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+            cover={<img alt="example" src={image} />}
         >
             <img
                 src={logo}
@@ -27,9 +27,9 @@ const CardComponent = (props) => {
                     <WrapperStyleTextSell> | Đã bán {selled || 999}</WrapperStyleTextSell>
                 </WrapperReportText>
                 <WrapperPriceText>
-                    {price}
+                    <span>{price.toLocaleString()}</span>
                     <WrapperDiscountText>
-                        {discount || 5} %
+                        - {discount || 5} %
                     </WrapperDiscountText>
                 </WrapperPriceText>
         </WrapperCardStyle>
