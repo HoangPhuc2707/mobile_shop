@@ -31,7 +31,7 @@ const NavBarComponent = () => {
                 return options.map((option) => {
                     return (
                         <div style={{ display: 'flex', gap: '10px' }}>
-                            <Rate style={{ fontSize: '12px' }} disabled defaultValue={option} />
+                            <Rate style={{ fontSize: '11px' }} disabled defaultValue={option} />
                             <span>{`từ ${option} sao`}</span>
                         </div>
                     )
