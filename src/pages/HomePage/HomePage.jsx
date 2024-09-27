@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TypeProduct from "../../components/TypeProduct/TypeProduct";
 import { WrapperButtonMore, WrapperProducts, WrapperTypeProduct } from "./style";
 import slider1 from '../../assets/images/slider1.webp';
@@ -17,12 +17,19 @@ const HomePage = () => {
     const searchDebounce = useDebounce(searchProduct, 1000)
     const [loading, setLoading] = useState(false)
     const [limit, setLimit] = useState(6)
-    const arr = ['TiVi', 'Điện thoại', 'Laptop', 'Phụ kiện', 'Tai nghe']
+    const [typeProducts, setTypeProducts] = useState([])
     const fetchProductAll = async (context) => {
         const limit = context?.queryKey && context?.queryKey[1]
         const search = context?.queryKey && context?.queryKey[2]
         const res = await ProductService.getAllProduct(search, limit)
             return res
+    }
+
+    const fetchAllTypeProduct = async () => {
+        const res = await ProductService.getAllTypeProduct()
+        if(res?.status === 'OK'){
+            setTypeProducts(res?.data)
+        }
     }
 
     const { isPending, data: products, isPreviousData } = useQuery({
@@ -33,11 +40,15 @@ const HomePage = () => {
         keepPreviousData: true
     });
 
+    useEffect(() => {
+        fetchAllTypeProduct()
+    }, [])
+
     return (
         <Loading isPending={isPending || loading}>
             <div style={{ width: '1024px', margin: '0 auto' }}>
                 <WrapperTypeProduct>
-                    {arr.map((item) => {
+                    {typeProducts.map((item) => {
                         return (
                             <TypeProduct name={item} key={item} />
                         )

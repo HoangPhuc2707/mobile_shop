@@ -13,7 +13,10 @@ const ProductDetailsComponent = ({ idProduct }) => {
     const [numProduct, setNumProduct] = useState(1)
     const user = useSelector((state) => state.user)
     const onChange = (value) => { 
-        setNumProduct(Number(value))
+        const numericValue = Number(value);
+        if (numericValue >= 1 && numericValue <= 99) {
+            setNumProduct(numericValue);
+        }
     }
 
     const fetchGetDetailsProduct = async (context) => {
@@ -25,10 +28,14 @@ const ProductDetailsComponent = ({ idProduct }) => {
     }
 
     const handleChangeCount = (type) => {
-        if(type === 'increase'){
-            setNumProduct(numProduct + 1)
+        if (type === 'increase') {
+            if (numProduct < 99) { 
+                setNumProduct(numProduct + 1);
+            }
         } else {
-            setNumProduct(numProduct - 1)
+            if (numProduct > 1) { 
+                setNumProduct(numProduct - 1);
+            }
         }
     }
 
