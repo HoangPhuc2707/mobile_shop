@@ -6,17 +6,27 @@ import { WrapperNavbar, WrapperProducts } from "./style";
 import { useLocation } from "react-router-dom";
 import * as ProductService from '../../services/ProductService'
 import Loading from "../../components/LoadingComponent/Loading";
+import { useSelector } from "react-redux";
+import { useDebounce } from "../../hooks/useDebounce";
 
 const TypeProductPage = () => {
+    const searchProduct = useSelector((state) => state?.product?.search)
+    const searchDebounce = useDebounce(searchProduct, 500)
     const { state } = useLocation()
     const [products, setProducts] = useState([])
     const [pending, setPending] = useState(false)
-    const fetchProductType = async (type) => {
+    const [panigate, setPanigate] = useState({
+        page: 0,
+        limit: 10,
+        total: 1,
+    })
+    const fetchProductType = async (type, page, limit) => {
         setPending(true)
-        const res = await ProductService.getProductType(type)
+        const res = await ProductService.getProductType(type, page, limit)
         if (res?.status === 'OK') {
             setPending(false)
             setProducts(res?.data)
+            setPanigate({...panigate, total: res?.totalPage})
         } else {
             setPending(false)
         }
@@ -24,21 +34,29 @@ const TypeProductPage = () => {
 
     useEffect(() => {
         if (state) {
-            fetchProductType(state)
+            fetchProductType(state, panigate.page, panigate.limit)
         }
-    }, [state])
-    const onChange = () => { }
+    }, [state,panigate.page,panigate.limit])
+    const onChange = (current, pageSize) => { 
+        setPanigate({...panigate, page: current -1, limit: pageSize})
+    }
     return (
         <Loading isPending={pending}>
-        <div style={{ width: '100%', background: '#efefef', height: 'calc(100vh - 60px)' }}>
+        <div style={{ width: '100%', background: '#efefef', height: 'calc(100% - 60px)' }}>
             <div style={{ width: '1024px', margin: '0 auto', height: '100%' }}>
-                <Row style={{ flexWrap: 'nowrap', paddingTop: '10px', height: 'calc(100% - 20px)' }}>
+                <Row style={{ width: '1000px',flexWrap: 'nowrap', paddingTop: '10px', height: 'calc(100% - 10px)' }}>
                     <WrapperNavbar span={4} >
                         <NavBarComponent />
                     </WrapperNavbar>
                     <Col span={20} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                         <WrapperProducts>
-                            {products?.map((product) => {
+                            {products?.filter((pro) => {
+                                if(searchDebounce === '') {
+                                    return pro
+                                } else if (pro?.name?.toLowerCase()?.includes(searchDebounce?.toLowerCase())){
+                                    return pro
+                                }
+                            })?.map((product) => {
                                 return (
                                     <CardComponent
                                         key={product._id}
@@ -56,8 +74,8 @@ const TypeProductPage = () => {
                             })}
                         </WrapperProducts>
                         <Pagination
-                            defaultCurrent={2}
-                            total={100}
+                            defaultCurrent={panigate.page + 1}
+                            total={panigate?.total}
                             onChange={onChange}
                             style={{ textAlign: 'center', marginTop: '10px', justifyContent: 'center', marginBottom: '20px' }} />
                     </Col>
