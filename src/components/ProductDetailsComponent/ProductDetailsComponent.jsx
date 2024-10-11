@@ -7,12 +7,17 @@ import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import * as ProductService from '../../services/ProductService';
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../LoadingComponent/Loading";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { addOrderProduct } from "../../redux/slides/orderSlide";
 
 const ProductDetailsComponent = ({ idProduct }) => {
     const [numProduct, setNumProduct] = useState(1)
     const user = useSelector((state) => state.user)
-    const onChange = (value) => { 
+    const navigate = useNavigate()
+    const location = useLocation()
+    const dispatch = useDispatch()
+    const onChange = (value) => {
         const numericValue = Number(value);
         if (numericValue >= 1 && numericValue <= 99) {
             setNumProduct(numericValue);
@@ -29,11 +34,11 @@ const ProductDetailsComponent = ({ idProduct }) => {
 
     const handleChangeCount = (type) => {
         if (type === 'increase') {
-            if (numProduct < 99) { 
+            if (numProduct < 99) {
                 setNumProduct(numProduct + 1);
             }
         } else {
-            if (numProduct > 1) { 
+            if (numProduct > 1) {
                 setNumProduct(numProduct - 1);
             }
         }
@@ -44,6 +49,22 @@ const ProductDetailsComponent = ({ idProduct }) => {
         queryFn: fetchGetDetailsProduct,
         enabled: !!idProduct
     });
+
+    const handleAddOrderProduct = () => {
+        if (!user.id) {
+            navigate('/sign-in', { state: location?.pathname })
+        }else{
+            dispatch(addOrderProduct({
+                orderItem: {
+                    name: productDetails?.name,
+                    amount: numProduct,
+                    image: productDetails?.image,
+                    price: productDetails?.price,
+                    product: productDetails?._id
+                }
+            }))
+        }
+    }
 
     return (
         <Loading isPending={isPending}>
@@ -74,7 +95,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                 <Col span={14} style={{ paddingLeft: '10px' }}>
                     <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
                     <div>
-                        <Rate allowHalf defaultValue={productDetails?.rating} value={productDetails?.rating}/>
+                        <Rate allowHalf defaultValue={productDetails?.rating} value={productDetails?.rating} />
                         <WrapperStyleTextSell> | Đã bán 999</WrapperStyleTextSell>
                     </div>
                     <WrapperPriceProduct>
@@ -93,7 +114,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             </button>
                             <WrapperInputNumber onChange={onChange} defaultValue={1} value={numProduct} size="small" />
                             <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase')}>
-                                <PlusOutlined style={{ color: '#000', fontSize: '20px' }}/>
+                                <PlusOutlined style={{ color: '#000', fontSize: '20px' }} />
                             </button>
                         </WrapperQualityProduct>
                     </div>
@@ -107,6 +128,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                 border: 'none',
                                 borderRadius: '4px',
                             }}
+                            onClick={handleAddOrderProduct}
                             textButton={'Chọn mua'}
                             styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>

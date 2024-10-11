@@ -17,6 +17,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     const [userName, setUserName] = useState('')
     const [userAvatar, setUserAvatar] = useState('')
     const [search, setSearch] = useState('')
+    const order = useSelector((state) => state.order)
     const [pending, setPending] = useState(false)
     const handleNavigateLogin = () => {
         navigate('/sign-in')
@@ -49,11 +50,12 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
         setSearch(e.target.value)
         dispatch(searchProduct(e.target.value))
     }
+    
     return (
         <div style={{ width: '100%', background: 'rgb(26, 148, 255)', display: 'flex', justifyContent: 'center' }}>
             <WrapperHeader style={{ justifyContent: isHiddenSearch && isHiddenCart ? 'space-between' : 'unset'}}>
                 <Col span={5}>
-                    <WrapperTextHeader>TiKi</WrapperTextHeader>
+                    <WrapperTextHeader onClick={() => navigate('/')} style={{ cursor: 'pointer'}}>TiKi</WrapperTextHeader>
                 </Col>
                 {!isHiddenSearch && (
                     <Col span={13}>
@@ -98,7 +100,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                     </Loading>
                     {!isHiddenCart && (
                         <div onClick={() => navigate('/order')} style={{ display: 'flex', cursor: 'pointer' }}>
-                            <Badge count={4} size="small">
+                            <Badge count={order?.orderItems?.length} size="small">
                                 <ShoppingCartOutlined style={{ fontSize: '30px', color: '#fff' }} />
                             </Badge>
                             <WrapperTextHeaderSmall>Giỏ hàng</WrapperTextHeaderSmall>
