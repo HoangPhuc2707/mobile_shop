@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  orderItems: [
-
-  ],
+  orderItems: [],
+  orderItemsSelected: [],
   shippingAddress: {
 
   },
@@ -35,32 +34,55 @@ export const orderSlide = createSlice({
     increaseAmount: (state, action) => {
       const { idProduct } = action.payload;
       const itemOrder = state?.orderItems?.find((item) => item?.product === idProduct);
+      const itemOrderSelected = state?.orderItemsSelected?.find((item) => item?.product === idProduct);
       if (itemOrder && itemOrder.amount < 99) {
         itemOrder.amount++;
+        if (itemOrderSelected) {
+          itemOrderSelected.amount++;
+        }
       }
     },
 
     decreaseAmount: (state, action) => {
       const { idProduct } = action.payload;
       const itemOrder = state?.orderItems?.find((item) => item?.product === idProduct);
+      const itemOrderSelected = state?.orderItemsSelected?.find((item) => item?.product === idProduct);
       if (itemOrder && itemOrder.amount > 1) {
         itemOrder.amount--;
+        if (itemOrderSelected) {
+          itemOrderSelected.amount--;
+        }
       }
     },
     removeOrderProduct: (state, action) => {
       const { idProduct } = action.payload
       const itemOrder = state?.orderItems?.filter((item) => item?.product !== idProduct)
+      const itemOrderSelected = state?.orderItemsSelected?.filter((item) => item?.product !== idProduct)
       state.orderItems = itemOrder
+      state.orderItemsSelected = itemOrderSelected
     },
     removeAllOrderProduct: (state, action) => {
       const { listChecked } = action.payload
       const itemOrder = state?.orderItems?.filter((item) => !listChecked.includes(item.product))
+      const itemOrderSelected = state?.orderItems?.filter((item) => !listChecked.includes(item.product))
       state.orderItems = itemOrder
+      state.orderItemsSelected = itemOrderSelected
     },
+    selectedOrder: (state, action) => {
+      console.log('selected', state, action)
+      const { listChecked } = action.payload
+      const orderSelected = []
+      state.orderItems.forEach((order) => {
+        if (listChecked.includes(order.product)) {
+          orderSelected.push(order)
+        }
+      })
+      state.orderItemsSelected = orderSelected
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addOrderProduct, increaseAmount, decreaseAmount, removeOrderProduct, removeAllOrderProduct } = orderSlide.actions
+export const { addOrderProduct, increaseAmount, decreaseAmount, removeOrderProduct, removeAllOrderProduct, selectedOrder } = orderSlide.actions
 
 export default orderSlide.reducer;

@@ -3,6 +3,7 @@ import { StyleNameProduct, WrapperCardStyle, WrapperDiscountText, WrapperPriceTe
 import { StarFilled } from '@ant-design/icons';
 import logo from '../../assets/images/official.png';
 import { useNavigate } from "react-router-dom";
+import { convertPrice } from "../../utils";
 
 const CardComponent = (props) => {
     const { countInStock, description, image, name, price, rating, type, discount, selled, id } = props
@@ -15,7 +16,8 @@ const CardComponent = (props) => {
             hoverable
             style={{ width: 240 }}
             cover={<img alt="example" src={image} />}
-            onClick={() => handleDetailsProduct(id)}
+            onClick={() => countInStock !== 0 && handleDetailsProduct(id)}
+            disabled={countInStock === 0}
         >
             <img
                 src={logo}
@@ -25,19 +27,19 @@ const CardComponent = (props) => {
                 }}
                 alt="official-logo"
             />
-                <StyleNameProduct>{name}</StyleNameProduct>
-                <WrapperReportText>
-                    <span style={{ marginRight: '4px' }}>
-                        <span>{rating}</span> <StarFilled style={{ fontSize: '12px', color: 'rgb(253, 216, 54' }} />
-                    </span>
-                    <WrapperStyleTextSell> | Đã bán {selled || 999}</WrapperStyleTextSell>
-                </WrapperReportText>
-                <WrapperPriceText>
-                    <span>{price?.toLocaleString()}</span>
-                    <WrapperDiscountText>
-                        - {discount || 5} %
-                    </WrapperDiscountText>
-                </WrapperPriceText>
+            <StyleNameProduct>{name}</StyleNameProduct>
+            <WrapperReportText>
+                <span style={{ marginRight: '4px' }}>
+                    <span>{rating}</span> <StarFilled style={{ fontSize: '12px', color: 'rgb(253, 216, 54' }} />
+                </span>
+                <WrapperStyleTextSell> | Đã bán {selled || 999}</WrapperStyleTextSell>
+            </WrapperReportText>
+            <WrapperPriceText>
+                <span>{convertPrice(price)}</span>
+                <WrapperDiscountText>
+                    - {discount || 5} %
+                </WrapperDiscountText>
+            </WrapperPriceText>
         </WrapperCardStyle>
     );
 };

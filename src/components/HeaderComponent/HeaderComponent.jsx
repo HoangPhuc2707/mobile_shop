@@ -17,6 +17,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     const [userName, setUserName] = useState('')
     const [userAvatar, setUserAvatar] = useState('')
     const [search, setSearch] = useState('')
+    const [isOpenPopup, setIsOpenPopup] = useState('')
     const order = useSelector((state) => state.order)
     const [pending, setPending] = useState(false)
     const handleNavigateLogin = () => {
@@ -27,6 +28,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
         await UserService.logoutUser()
         dispatch(resetUser())
         setPending(false)
+        navigate('/')
     }
 
     useEffect(() => {
@@ -38,24 +40,37 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
 
     const content = (
         <div>
-            <WrapperContentPopover onClick={() => navigate('/profile-user')}>Thông tin người dùng</WrapperContentPopover>
+            <WrapperContentPopover onClick={() => handleClickNavigate('profile-user')}>Thông tin người dùng</WrapperContentPopover>
             {user?.isAdmin && (
-                <WrapperContentPopover onClick={() => navigate('/system/admin')}>Quản lí hệ thống</WrapperContentPopover>
+                <WrapperContentPopover onClick={() => handleClickNavigate('admin')}>Quản lí hệ thống</WrapperContentPopover>
             )}
-            <WrapperContentPopover onClick={handleLogout}>Đăng xuất</WrapperContentPopover>
+            <WrapperContentPopover onClick={() => handleClickNavigate('my-order')}>Đơn hàng của tôi</WrapperContentPopover>
+            <WrapperContentPopover onClick={() => handleClickNavigate()}>Đăng xuất</WrapperContentPopover>
         </div>
     );
+    const handleClickNavigate = (type) => {
+        if (type === 'profile-user') {
+            navigate('/profile-user')
+        } else if (type === 'admin') {
+            navigate('/system/admin')
+        } else if (type === 'my-order') {
+            navigate('/my-order')
+        } else {
+            handleLogout()
+        }
+        setIsOpenPopup(false)
+    }
 
     const onSearch = (e) => {
         setSearch(e.target.value)
         dispatch(searchProduct(e.target.value))
     }
-    
+
     return (
         <div style={{ width: '100%', background: 'rgb(26, 148, 255)', display: 'flex', justifyContent: 'center' }}>
-            <WrapperHeader style={{ justifyContent: isHiddenSearch && isHiddenCart ? 'space-between' : 'unset'}}>
+            <WrapperHeader style={{ justifyContent: isHiddenSearch && isHiddenCart ? 'space-between' : 'unset' }}>
                 <Col span={5}>
-                    <WrapperTextHeader onClick={() => navigate('/')} style={{ cursor: 'pointer'}}>TiKi</WrapperTextHeader>
+                    <WrapperTextHeader onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>TiKi</WrapperTextHeader>
                 </Col>
                 {!isHiddenSearch && (
                     <Col span={13}>
@@ -82,8 +97,8 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                             )}
                             {user?.access_token ? (
                                 <>
-                                    <Popover content={content} trigger="click">
-                                        <div style={{ cursor: 'pointer', paddingTop: '5px' }}>{userName?.length ? userName : user?.email}</div>
+                                    <Popover content={content} trigger="click" open={isOpenPopup}>
+                                        <div style={{ cursor: 'pointer', paddingTop: '5px' }} onClick={() => setIsOpenPopup((prev) => !prev)}>{userName?.length ? userName : user?.email}</div>
                                     </Popover>
                                 </>
                             ) : (

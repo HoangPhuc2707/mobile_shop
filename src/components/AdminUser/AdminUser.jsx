@@ -22,7 +22,7 @@ const AdminUser = () => {
     const [isModalOpenDelete, setIsModalOpenDelete] = useState(false)
     const user = useSelector((state) => state?.user)
     const searchInput = useRef(null)
-    
+
     const [stateUserDetails, setStateUserDetails] = useState({
         name: '',
         email: '',
@@ -43,7 +43,7 @@ const AdminUser = () => {
                 ...rests } = data
             const res = UserService.updateUser(
                 id,
-                { ...rests},
+                { ...rests },
                 token)
             return res
         }
@@ -59,7 +59,7 @@ const AdminUser = () => {
             return res
         }
     )
-    
+
 
     const mutationDeleted = useMutationHooks(
         (data) => {
@@ -74,7 +74,7 @@ const AdminUser = () => {
     )
 
     const getAllUser = async () => {
-        const res = await UserService.getAllUser()
+        const res = await UserService.getAllUser(user?.access_token)
         return res
     }
 
@@ -309,7 +309,7 @@ const AdminUser = () => {
             [e.target.name]: e.target.value
         })
     }
-   
+
     const handleOnchangeAvatarDetails = async ({ fileList }) => {
         const file = fileList[0]
         if (!file.url && !file.preview) {
