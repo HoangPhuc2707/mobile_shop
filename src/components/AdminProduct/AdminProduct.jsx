@@ -31,7 +31,8 @@ const AdminProduct = () => {
         countInStock: '',
         rating: '',
         description: '',
-        newType: ''
+        newType: '',
+        discount: '',
     })
     const [stateProductDetails, setStateProductDetails] = useState({
         name: '',
@@ -41,6 +42,7 @@ const AdminProduct = () => {
         countInStock: '',
         rating: '',
         description: '',
+        discount: '',
     })
 
     const [form] = Form.useForm();
@@ -54,7 +56,8 @@ const AdminProduct = () => {
                 countInStock,
                 rating,
                 description,
-                image
+                image,
+                discount
             } = data
             const res = ProductService.createProduct({
                 name,
@@ -63,7 +66,8 @@ const AdminProduct = () => {
                 countInStock,
                 rating,
                 description,
-                image
+                image,
+                discount
             })
             return res
         }
@@ -122,6 +126,7 @@ const AdminProduct = () => {
                 countInStock: res?.data?.countInStock,
                 rating: res?.data?.rating,
                 description: res?.data?.description,
+                discount: res?.data?.discount,
             })
         }
         setIsPendingUpdate(false)
@@ -372,7 +377,8 @@ const AdminProduct = () => {
             type: '',
             countInStock: '',
             rating: '',
-            description: ''
+            description: '',
+            discount: '',
         })
         form.resetFields()
     }
@@ -385,6 +391,7 @@ const AdminProduct = () => {
             countInStock: stateProduct.countInStock,
             rating: stateProduct.rating,
             description: stateProduct.description,
+            discount: stateProduct.discount,
         }
         mutation.mutate(params, {
             onSettled: () => {
@@ -517,6 +524,13 @@ const AdminProduct = () => {
                             <InputComponent value={stateProduct.rating} onChange={handleOnChange} name="rating" />
                         </Form.Item>
                         <Form.Item
+                            label="Discount"
+                            name="discount"
+                            rules={[{ required: true, message: 'Please input your discount of product!' }]}
+                        >
+                            <InputComponent value={stateProduct.discount} onChange={handleOnChange} name="discount" />
+                        </Form.Item>
+                        <Form.Item
                             label="Description"
                             name="description"
                             rules={[{ required: true, message: 'Please input your description!' }]}
@@ -594,6 +608,13 @@ const AdminProduct = () => {
                             rules={[{ required: true, message: 'Please input your rating!' }]}
                         >
                             <InputComponent value={stateProductDetails.rating} onChange={handleOnChangeDetails} name="rating" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Discount"
+                            name="discount"
+                            rules={[{ required: true, message: 'Please input your discount of product!' }]}
+                        >
+                            <InputComponent value={stateProductDetails.discount} onChange={handleOnChangeDetails} name="discount" />
                         </Form.Item>
                         <Form.Item
                             label="Description"
