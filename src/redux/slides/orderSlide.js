@@ -35,7 +35,7 @@ export const orderSlide = createSlice({
       const { idProduct } = action.payload;
       const itemOrder = state?.orderItems?.find((item) => item?.product === idProduct);
       const itemOrderSelected = state?.orderItemsSelected?.find((item) => item?.product === idProduct);
-      if (itemOrder && itemOrder.amount < 99) {
+      if (itemOrder && itemOrder.amount < 50) {
         itemOrder.amount++;
         if (itemOrderSelected) {
           itemOrderSelected.amount++;
