@@ -13,6 +13,7 @@ export const WrapperStyleHeader = styled.div`
     font-size: 13px;
   }
 `
+
 export const WrapperStyleHeaderDilivery = styled.div`
   background: rgb(255, 255, 255);
   padding: 9px 16px;
@@ -40,9 +41,6 @@ export const WrapperContainer = styled.div`
   width: 100%;
 `
 
-export const WrapperListOrder = styled.div`
-
-`
 
 export const WrapperItemOrder = styled.div`
   display: flex;
@@ -51,6 +49,7 @@ export const WrapperItemOrder = styled.div`
   background: #fff;
   margin-top: 12px;
   justify-content: center;
+  border-bottom: 1px solid #c8c8c8;
 `
 
 export const WrapperPriceDiscount = styled.span`
@@ -93,6 +92,7 @@ export const WrapperItemOrderInfo = styled.div`
   border-top-left-radius: 6px;
   width: 100%;
   display: flex;
+  flex-direction: column; 
   justify-content: center;
 `
 

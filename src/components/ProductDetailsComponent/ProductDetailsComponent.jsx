@@ -20,7 +20,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
     const dispatch = useDispatch()
     const onChange = (value) => {
         const numericValue = Number(value);
-        if (numericValue >= 1 && numericValue <= 99) {
+        if (numericValue >= 1 && numericValue <= 50) {
             setNumProduct(numericValue);
         }
     }
@@ -35,7 +35,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
 
     const handleChangeCount = (type) => {
         if (type === 'increase') {
-            if (numProduct < 99) {
+            if (numProduct < 50) {
                 setNumProduct(numProduct + 1);
             }
         } else {
@@ -61,7 +61,9 @@ const ProductDetailsComponent = ({ idProduct }) => {
                     amount: numProduct,
                     image: productDetails?.image,
                     price: productDetails?.price,
-                    product: productDetails?._id
+                    product: productDetails?._id,
+                    discount: productDetails?.discount,
+                    countInstock: productDetails?.countInStock
                 }
             }))
         }

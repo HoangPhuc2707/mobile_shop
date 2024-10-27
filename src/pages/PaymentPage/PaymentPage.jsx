@@ -59,7 +59,9 @@ const PaymentPage = () => {
 
     const discountMemo = useMemo(() => {
         const result = order?.orderItemsSelected?.reduce((total, cur) => {
-            return total + ((cur.discount * cur.amount))
+            const totalDiscount = cur.discount ? cur.discount : 0
+            const discountAmount = (cur.price * cur.amount * totalDiscount) / 100
+            return total + discountAmount
         }, 0)
         if (Number(result)) {
             return result
@@ -68,12 +70,12 @@ const PaymentPage = () => {
     }, [order])
 
     const deliveryPriceMemo = useMemo(() => {
-        if (priceMemo > 200000) {
-            return 10000
-        } else if (priceMemo === 0) {
+        if (priceMemo >= 200000 && priceMemo < 500000) {
+            return 15000
+        } else if (priceMemo >= 500000) {
             return 0
         } else {
-            return 20000
+            return 30000
         }
     }, [priceMemo])
 
@@ -144,7 +146,9 @@ const PaymentPage = () => {
                     delivery,
                     payment,
                     orders: order?.orderItemsSelected,
-                    totalPriceMemo: totalPriceMemo
+                    totalPriceMemo: totalPriceMemo,
+                    deliveryPriceMemo: deliveryPriceMemo,
+                    discountMemo: discountMemo,
                 }
             })
         } else if (isError) {
@@ -233,7 +237,7 @@ const PaymentPage = () => {
                                     </div>
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                         <span>Giảm giá</span>
-                                        <span style={{ color: '#000', fontSize: '14px', fontWeight: 'bold' }}>{`${discountMemo} %`}</span>
+                                        <span style={{ color: '#000', fontSize: '14px', fontWeight: 'bold' }}>{convertPrice(discountMemo)}</span>
                                     </div>
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                         <span>Phí giao hàng</span>
