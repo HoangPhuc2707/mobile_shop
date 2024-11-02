@@ -14,6 +14,8 @@ import * as message from "../../components/Message/Message";
 import { updateUser } from "../../redux/slides/userSlide";
 import { useNavigate } from "react-router-dom";
 import { removeAllOrderProduct } from "../../redux/slides/orderSlide";
+import { PayPalButton } from "react-paypal-button-v2";
+import * as PaymentService from '../../services/PaymentService';
 
 const PaymentPage = () => {
     const order = useSelector((state) => state.order)
@@ -21,6 +23,7 @@ const PaymentPage = () => {
     const [delivery, setDelivery] = useState('fast')
     const [payment, setPayment] = useState('later_money')
     const navigate = useNavigate()
+    const [sdkReady, setSdkReady] = useState(false)
     const [isOpenModalUpdateInfo, setIsOpenModalUpdateInfo] = useState(false)
     const [stateUserDetails, setStateUserDetails] = useState({
         name: '',
@@ -168,6 +171,25 @@ const PaymentPage = () => {
         setIsOpenModalUpdateInfo(false)
     }
 
+    const onSuccessPaypal = (details, data) => {
+        mutationAddOrder.mutate({
+            token: user?.access_token,
+            orderItems: order?.orderItemsSelected,
+            fullName: user?.name,
+            address: user?.address,
+            phone: user?.phone,
+            city: user?.city,
+            paymentMethod: payment,
+            itemsPrice: priceMemo,
+            shippingPrice: deliveryPriceMemo,
+            totalPrice: totalPriceMemo,
+            user: user?.id,
+            isPaid: true,
+            paidAt: details.update_time
+        },
+        )
+    }
+
     const handleUpdateInfoUser = () => {
         const { name, address, phone, city } = stateUserDetails
         if (name && address && phone && city) {
@@ -195,6 +217,24 @@ const PaymentPage = () => {
         setPayment(e.target.value)
     }
 
+    const addPaypalScript = async () => {
+        const { data } = await PaymentService.getConfig()
+        const script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.src = `https://sandbox.paypal.com/sdk/js?client-id=${data}`
+        script.async = true
+        script.onload = () => {
+            setSdkReady(true)
+        }
+        document.body.appendChild(script)
+    }
+    useEffect(() => {
+        if (!window.paypal) {
+            addPaypalScript()
+        } else {
+            setSdkReady(true)
+        }
+    }, [])
     return (
         <div style={{ background: '#f5f5fa', with: '100%', height: '100vh' }}>
             <Loading isPending={isPendingAddOrder}>
@@ -252,20 +292,34 @@ const PaymentPage = () => {
                                     </span>
                                 </WrapperTotal>
                             </div>
-                            <ButtonComponent
-                                onClick={() => handleAddOrder()}
-                                size={40}
-                                styleButton={{
-                                    background: 'rgb(255, 57, 69)',
-                                    height: '48px',
-                                    width: '360px',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    marginLeft: '40px'
-                                }}
-                                textButton={'Đặt hàng'}
-                                styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
-                            ></ButtonComponent>
+                            {payment === 'paypal' && sdkReady ? (
+                                <div style={{ width: '360px', marginLeft: '40px' }}>
+                                    <PayPalButton
+                                        amount={totalPriceMemo / 30000}
+                                        // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                                        onSuccess={onSuccessPaypal}
+                                        onError={() => {
+                                            alert('Error')
+                                        }}
+                                    />
+                                </div>
+                            ) : (
+                                <ButtonComponent
+                                    onClick={() => handleAddOrder()}
+                                    size={40}
+                                    styleButton={{
+                                        background: 'rgb(255, 57, 69)',
+                                        height: '48px',
+                                        width: '360px',
+                                        border: 'none',
+                                        borderRadius: '4px',
+                                        marginLeft: '40px'
+                                    }}
+                                    textButton={'Đặt hàng'}
+                                    styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
+                                ></ButtonComponent>
+                            )}
+
                         </WrapperRight>
                     </div>
                 </div>

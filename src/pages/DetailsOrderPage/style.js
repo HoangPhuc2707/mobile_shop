@@ -51,6 +51,7 @@ export const WrapperStyleContent = styled.div`
   gap: 10px;
   margin-top: 20px;
   padding: 10px;
+  padding-bottom: 35px;
 `
 
 export const WrapperProduct = styled.div`
