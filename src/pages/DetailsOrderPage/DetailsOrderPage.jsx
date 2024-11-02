@@ -35,8 +35,8 @@ const DetailsOrderPage = () => {
 
   return (
     <Loading isPending={isPending}>
-      <div style={{ width: '100%', height: '100vh', background: '#f5f5fa' }}>
-        <div style={{ width: '1024px', margin: '0 auto', height: '1024px' }}>
+      <div style={{ width: '100%', height: '100%', background: '#f5f5fa' }}>
+        <div style={{ width: '1024px', margin: '0 auto', height: '100%', paddingBottom: '10px' }}>
           <h4 style={{ fontWeight: 'bold', margin: '0', padding: '10px 0' }}>Chi tiết đơn hàng</h4>
           <WrapperHeaderUser>
             <WrapperInfoUser>
@@ -44,7 +44,7 @@ const DetailsOrderPage = () => {
               <WrapperContentInfo>
                 <div className='name-info'>{data?.shippingAddress?.fullName}</div>
                 <div className='address-info'><span>Địa chỉ: </span> {`${data?.shippingAddress?.address} ${data?.shippingAddress?.city}`}</div>
-                <div className='phone-info'><span>Điện thoại: </span> {data?.shippingAddress?.phone}</div>
+                <div className='phone-info'><span>Điện thoại: 0</span>{data?.shippingAddress?.phone}</div>
               </WrapperContentInfo>
             </WrapperInfoUser>
             <WrapperInfoUser>

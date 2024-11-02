@@ -99,7 +99,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                     <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
                     <div>
                         <Rate allowHalf defaultValue={productDetails?.rating} value={productDetails?.rating} />
-                        <WrapperStyleTextSell> | Đã bán 999</WrapperStyleTextSell>
+                        <WrapperStyleTextSell> | Đã bán {productDetails?.selled || 999}</WrapperStyleTextSell>
                     </div>
                     <WrapperPriceProduct>
                         <WrapperPriceTextProduct>{convertPrice(productDetails?.price)}</WrapperPriceTextProduct>
