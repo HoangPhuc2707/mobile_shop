@@ -78,7 +78,6 @@ export const orderSlide = createSlice({
       state.orderItemsSelected = itemOrderSelected
     },
     selectedOrder: (state, action) => {
-      console.log('selected', state, action)
       const { listChecked } = action.payload
       const orderSelected = []
       state.orderItems.forEach((order) => {

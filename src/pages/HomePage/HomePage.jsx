@@ -22,12 +22,12 @@ const HomePage = () => {
         const limit = context?.queryKey && context?.queryKey[1]
         const search = context?.queryKey && context?.queryKey[2]
         const res = await ProductService.getAllProduct(search, limit)
-            return res
+        return res
     }
 
     const fetchAllTypeProduct = async () => {
         const res = await ProductService.getAllTypeProduct()
-        if(res?.status === 'OK'){
+        if (res?.status === 'OK') {
             setTypeProducts(res?.data)
         }
     }
@@ -79,16 +79,16 @@ const HomePage = () => {
                     </WrapperProducts>
                     <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10px' }} >
                         <WrapperButtonMore
-                            textButton={isPreviousData ? 'Load more' : 'Xem thêm'}
+                            textbutton={isPreviousData ? 'Load more' : 'Xem thêm'}
                             type="outline"
                             styleButton={{
-                                border: '1px solid rgb(11, 116, 229)', 
+                                border: '1px solid rgb(11, 116, 229)',
                                 color: `${products?.total === products?.data?.length ? '#ccc' : 'rgb(11, 116, 229)'}`,
                                 width: '240px', height: '38px', borderRadius: '4px'
                             }}
                             isDisabled={products?.total === products?.data?.length || products?.totalPage === 1}
-                            styleTextButton={{ fontWeight: '500', color: products?.total === products?.data?.length && '#fff'}} 
-                            onClick={() => setLimit((prev) => prev + 6)}/>
+                            styletextbutton={{ fontWeight: '500', color: products?.total === products?.data?.length && '#fff' }}
+                            onClick={() => setLimit((prev) => prev + 6)} />
                     </div>
                 </div>
             </div>

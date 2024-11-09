@@ -117,8 +117,8 @@ const MyOrderPage = () => {
                                                     border: '1px solid #9255FD',
                                                     borderRadius: '4px'
                                                 }}
-                                                textButton={'Hủy đơn hàng'}
-                                                styleTextButton={{ color: '#9255FD', fontSize: '14px' }}
+                                                textbutton={'Hủy đơn hàng'}
+                                                styletextbutton={{ color: '#9255FD', fontSize: '14px' }}
                                             >
                                             </ButtonComponent>
                                             <ButtonComponent
@@ -129,8 +129,8 @@ const MyOrderPage = () => {
                                                     border: '1px solid #9255FD',
                                                     borderRadius: '4px'
                                                 }}
-                                                textButton={'Xem chi tiết'}
-                                                styleTextButton={{ color: '#9255FD', fontSize: '14px' }}
+                                                textbutton={'Xem chi tiết'}
+                                                styletextbutton={{ color: '#9255FD', fontSize: '14px' }}
                                             >
                                             </ButtonComponent>
                                         </div>

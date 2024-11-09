@@ -31,7 +31,7 @@ const SignUpPage = () => {
         } else if (isError) {
             message.error()
         }
-    }, [ isSuccess, isError])
+    }, [isSuccess, isError])
 
     const handleOnchangeEmail = (value) => {
         setEmail(value)
@@ -124,8 +124,8 @@ const SignUpPage = () => {
                                 borderRadius: '4px',
                                 margin: '26px 0 10px'
                             }}
-                            textButton={'Đăng ký'}
-                            styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
+                            textbutton={'Đăng ký'}
+                            styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </Loading>
                     <p>Bạn đã có tài khoản? <WrapperTextLight onClick={handleNavigateSignIn}>Đăng nhập</WrapperTextLight></p>

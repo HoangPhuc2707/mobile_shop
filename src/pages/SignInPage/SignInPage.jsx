@@ -48,8 +48,6 @@ const SignInPage = () => {
         dispatch(updateUser({ ...res?.data, access_token: token }))
     }
 
-    console.log('mutation', mutation)
-
     const handleOnchangeEmail = (value) => {
         setEmail(value)
     }
@@ -67,7 +65,6 @@ const SignInPage = () => {
             email,
             password
         })
-        console.log('sign-in', email, password)
     }
     return (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgb(0, 0, 0, 0.53)', height: '100vh' }}>
@@ -114,8 +111,8 @@ const SignInPage = () => {
                                 borderRadius: '4px',
                                 margin: '26px 0 10px'
                             }}
-                            textButton={'Đăng nhập'}
-                            styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
+                            textbutton={'Đăng nhập'}
+                            styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </Loading>
                     <p><WrapperTextLight>Quên mật khẩu?</WrapperTextLight></p>

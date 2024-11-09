@@ -12,8 +12,8 @@ export const WrapperCardStyle = styled(Card)`
         padding-left: 10px;
         padding-top: 20px;
     }
-    background-color: ${props => props.disabled ? '#ccc' : '#fff'};
-    cursor: ${props => props.disable ? 'not-allowed' : 'pointer'};
+    background-color: #fff;
+    cursor: pointer;
 `
 
 export const StyleNameProduct = styled.div`

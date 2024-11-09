@@ -223,7 +223,7 @@ const OrderPage = () => {
                         <WrapperListOrder>
                             {order?.orderItems?.map((order) => {
                                 return (
-                                    <WrapperItemOrder>
+                                    <WrapperItemOrder key={order?.product}>
                                         <div style={{ width: '290px', display: 'flex', alignItems: 'center', gap: 4 }}>
                                             <Checkbox onChange={onChange} value={order?.product} checked={listChecked.includes(order?.product)}></Checkbox>
                                             <img src={order?.image} alt="item-order" style={{ width: '77px', height: '79px', objectFit: 'cover' }} />
@@ -294,8 +294,8 @@ const OrderPage = () => {
                                 borderRadius: '4px',
                                 marginLeft: '40px'
                             }}
-                            textButton={'Mua hàng'}
-                            styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
+                            textbutton={'Mua hàng'}
+                            styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </WrapperRight>
                 </div>
