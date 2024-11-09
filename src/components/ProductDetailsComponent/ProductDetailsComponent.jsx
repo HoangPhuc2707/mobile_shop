@@ -10,8 +10,10 @@ import Loading from "../LoadingComponent/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { addOrderProduct, resetOrder } from "../../redux/slides/orderSlide";
-import { convertPrice } from "../../utils";
+import { convertPrice, initFacebookSDK } from "../../utils";
 import * as message from '../Message/Message'
+import LikeButtonComponent from "../LikeButtonComponent/LikeButtonComponent";
+import CommentComponent from "../CommentComponent/CommentComponent";
 
 const ProductDetailsComponent = ({ idProduct }) => {
     const [numProduct, setNumProduct] = useState(1)
@@ -37,10 +39,14 @@ const ProductDetailsComponent = ({ idProduct }) => {
     }
 
     useEffect(() => {
+        initFacebookSDK()
+    }, [])
+
+    useEffect(() => {
         const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id)
-        if ((orderRedux?.amount + numProduct) <= orderRedux?.countInstock || !orderRedux) {
+        if ((orderRedux?.amount + numProduct) <= orderRedux?.countInstock || (!orderRedux && productDetails?.countInStock > 0)) {
             setErrorLimitOrder(false)
-        } else {
+        } else if (productDetails?.countInStock === 0) {
             setErrorLimitOrder(true)
         }
     }, [numProduct])
@@ -77,7 +83,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
             navigate('/sign-in', { state: location?.pathname })
         } else {
             const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id)
-            if ((orderRedux?.amount + numProduct) <= orderRedux?.countInstock || !orderRedux) {
+            if ((orderRedux?.amount + numProduct) <= orderRedux?.countInstock || (!orderRedux && productDetails?.countInStock > 0)) {
                 dispatch(addOrderProduct({
                     orderItem: {
                         name: productDetails?.name,
@@ -135,6 +141,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         <span className='address'>{user?.address}</span>
                         <span className='change-address'>- Đổi địa chỉ</span>
                     </WrapperAddressProduct>
+                    <LikeButtonComponent dataHref={"https://developers.facebook.com/docs/plugins/"} />
                     <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
                         <div style={{ marginBottom: '10px' }}>Số lượng</div>
                         <WrapperQualityProduct>
@@ -159,8 +166,8 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                     borderRadius: '4px',
                                 }}
                                 onClick={handleAddOrderProduct}
-                                textButton={'Chọn mua'}
-                                styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
+                                textbutton={'Chọn mua'}
+                                styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                             ></ButtonComponent>
                             {errorLimitOrder && <div style={{ color: 'red' }}>Sản phẩm đã hết hàng</div>}
                         </div>
@@ -173,11 +180,12 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                 border: '1px solid rgb(13, 92, 182)',
                                 borderRadius: '4px',
                             }}
-                            textButton={'Mua trả sau'}
-                            styleTextButton={{ color: 'rgb(13, 92, 182)', fontSize: '15px' }}
+                            textbutton={'Mua trả sau'}
+                            styletextbutton={{ color: 'rgb(13, 92, 182)', fontSize: '15px' }}
                         ></ButtonComponent>
                     </div>
                 </Col>
+                <CommentComponent dataHref={"https://developers.facebook.com/docs/plugins/comments#configurator"} width="1000" />
             </Row>
         </Loading>
     );

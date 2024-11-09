@@ -34,7 +34,7 @@ const OrderSuccess = () => {
                             <WrapperItemOrderInfo>
                                 {state.orders?.map((order) => {
                                     return (
-                                        <WrapperItemOrder>
+                                        <WrapperItemOrder key={order?.name}>
                                             <div style={{ width: '400px', display: 'flex', alignItems: 'center', gap: 4 }}>
                                                 <img src={order.image} alt="item-order" style={{ width: '77px', height: '79px', objectFit: 'cover' }} />
                                                 <div style={{ width: '260px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>

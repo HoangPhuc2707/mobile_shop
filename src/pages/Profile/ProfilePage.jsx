@@ -21,7 +21,7 @@ const ProfilePage = () => {
     const [avatar, setAvatar] = useState('')
     const mutation = useMutationHooks(
         (data) => {
-            const { id, access_token, ...rests} = data
+            const { id, access_token, ...rests } = data
             UserService.updateUser(id, rests, access_token)
         }
     )
@@ -47,7 +47,7 @@ const ProfilePage = () => {
 
     const handleGetDetailsUser = async (id, token) => {
         const res = await UserService.getDetailsUser(id, token)
-        dispatch(updateUser({...res?.data, access_token: token}))
+        dispatch(updateUser({ ...res?.data, access_token: token }))
     }
 
     const handleOnchangeEmail = (value) => {
@@ -62,7 +62,7 @@ const ProfilePage = () => {
     const handleOnchangeAddress = (value) => {
         setAddress(value)
     }
-    const handleOnchangeAvatar = async ({fileList}) => {
+    const handleOnchangeAvatar = async ({ fileList }) => {
         const file = fileList[0]
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
@@ -71,15 +71,15 @@ const ProfilePage = () => {
     }
 
     const handleUpdate = () => {
-        mutation.mutate({ id: user?.id, email, name, phone, address, avatar, access_token : user?.access_token })
-        
+        mutation.mutate({ id: user?.id, email, name, phone, address, avatar, access_token: user?.access_token })
+
     }
     return (
         <div style={{ width: '1080px', margin: '0 auto', height: '500px' }}>
             <WrapperHeader>Thông tin người dùng</WrapperHeader>
             <Loading isPending={isPending}>
                 <WrapperContentProfile>
-                <WrapperInput>
+                    <WrapperInput>
                         <WrapperLabel htmlFor="avatar">Avatar</WrapperLabel>
                         <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
                             <Button icon={<UploadOutlined />}>Select file</Button>
@@ -90,7 +90,7 @@ const ProfilePage = () => {
                                 width: '60px',
                                 borderRadius: '50%',
                                 objectFit: 'cover'
-                            }} alt="avatar"/>
+                            }} alt="avatar" />
                         )}
                         {/* <InputForm style={{ width: '300px' }} id="avatar" value={avatar} onChange={handleOnchangeAvatar} /> */}
                         <ButtonComponent
@@ -102,8 +102,8 @@ const ProfilePage = () => {
                                 borderRadius: '4px',
                                 padding: '4px 6px 6px'
                             }}
-                            textButton={'Cập nhật'}
-                            styleTextButton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
+                            textbutton={'Cập nhật'}
+                            styletextbutton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </WrapperInput>
                     <WrapperInput>
@@ -118,8 +118,8 @@ const ProfilePage = () => {
                                 borderRadius: '4px',
                                 padding: '4px 6px 6px'
                             }}
-                            textButton={'Cập nhật'}
-                            styleTextButton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
+                            textbutton={'Cập nhật'}
+                            styletextbutton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </WrapperInput>
                     <WrapperInput>
@@ -134,8 +134,8 @@ const ProfilePage = () => {
                                 borderRadius: '4px',
                                 padding: '4px 6px 6px'
                             }}
-                            textButton={'Cập nhật'}
-                            styleTextButton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
+                            textbutton={'Cập nhật'}
+                            styletextbutton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </WrapperInput>
                     <WrapperInput>
@@ -150,8 +150,8 @@ const ProfilePage = () => {
                                 borderRadius: '4px',
                                 padding: '4px 6px 6px'
                             }}
-                            textButton={'Cập nhật'}
-                            styleTextButton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
+                            textbutton={'Cập nhật'}
+                            styletextbutton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </WrapperInput>
                     <WrapperInput>
@@ -166,8 +166,8 @@ const ProfilePage = () => {
                                 borderRadius: '4px',
                                 padding: '4px 6px 6px'
                             }}
-                            textButton={'Cập nhật'}
-                            styleTextButton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
+                            textbutton={'Cập nhật'}
+                            styletextbutton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </WrapperInput>
                 </WrapperContentProfile>
