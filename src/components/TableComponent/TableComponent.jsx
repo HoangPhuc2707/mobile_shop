@@ -41,18 +41,21 @@ const TableComponent = (props) => {
         <Loading isPending={isPending}>
             {rowSelectedKeys.length > 0 && (
                 <div style={{
-                    background: '#1d1ddd',
+                    background: '#FF6347',
                     color: '#fff',
                     fontWeight: 'bold',
                     padding: '10px',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    marginBottom: '10px',
+                    width: '100px',
+                    borderRadius: '4px',
                 }}
                     onClick={handleDeleteAll}
                 >
                     Xóa tất cả
                 </div>
             )}
-            <Button style={{ marginBottom: '10px'}} onClick={exportExcel}>Export Excel</Button>
+            <Button style={{ marginBottom: '10px' }} onClick={exportExcel}>Xuất file Excel</Button>
             <Table
                 rowSelection={{
                     type: selectionType,

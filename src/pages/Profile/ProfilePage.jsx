@@ -19,6 +19,7 @@ const ProfilePage = () => {
     const [phone, setPhone] = useState('')
     const [address, setAddress] = useState('')
     const [avatar, setAvatar] = useState('')
+    const [city, setCity] = useState('')
     const mutation = useMutationHooks(
         (data) => {
             const { id, access_token, ...rests } = data
@@ -34,6 +35,7 @@ const ProfilePage = () => {
         setPhone(user?.phone)
         setAddress(user?.address)
         setAvatar(user?.avatar)
+        setCity(user?.city)
     }, [user])
 
     useEffect(() => {
@@ -62,6 +64,9 @@ const ProfilePage = () => {
     const handleOnchangeAddress = (value) => {
         setAddress(value)
     }
+    const handleOnchangeCity = (value) => {
+        setCity(value)
+    }
     const handleOnchangeAvatar = async ({ fileList }) => {
         const file = fileList[0]
         if (!file.url && !file.preview) {
@@ -71,7 +76,7 @@ const ProfilePage = () => {
     }
 
     const handleUpdate = () => {
-        mutation.mutate({ id: user?.id, email, name, phone, address, avatar, access_token: user?.access_token })
+        mutation.mutate({ id: user?.id, email, name, phone, address, city, avatar, access_token: user?.access_token })
 
     }
     return (
@@ -80,9 +85,9 @@ const ProfilePage = () => {
             <Loading isPending={isPending}>
                 <WrapperContentProfile>
                     <WrapperInput>
-                        <WrapperLabel htmlFor="avatar">Avatar</WrapperLabel>
+                        <WrapperLabel htmlFor="avatar">Ảnh đại diện</WrapperLabel>
                         <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
-                            <Button icon={<UploadOutlined />}>Select file</Button>
+                            <Button icon={<UploadOutlined />}>Chọn file</Button>
                         </WrapperUploadFile>
                         {avatar && (
                             <img src={avatar} style={{
@@ -107,7 +112,7 @@ const ProfilePage = () => {
                         ></ButtonComponent>
                     </WrapperInput>
                     <WrapperInput>
-                        <WrapperLabel htmlFor="name">Name</WrapperLabel>
+                        <WrapperLabel htmlFor="name">Tên</WrapperLabel>
                         <InputForm style={{ width: '300px' }} id="name" value={name} onChange={handleOnchangeName} />
                         <ButtonComponent
                             onClick={handleUpdate}
@@ -139,7 +144,7 @@ const ProfilePage = () => {
                         ></ButtonComponent>
                     </WrapperInput>
                     <WrapperInput>
-                        <WrapperLabel htmlFor="phone">Phone</WrapperLabel>
+                        <WrapperLabel htmlFor="phone">Số điện thoại</WrapperLabel>
                         <InputForm style={{ width: '300px' }} id="phone" value={phone} onChange={handleOnchangePhone} />
                         <ButtonComponent
                             onClick={handleUpdate}
@@ -155,8 +160,24 @@ const ProfilePage = () => {
                         ></ButtonComponent>
                     </WrapperInput>
                     <WrapperInput>
-                        <WrapperLabel htmlFor="address">Address</WrapperLabel>
+                        <WrapperLabel htmlFor="address">Địa chỉ</WrapperLabel>
                         <InputForm style={{ width: '300px' }} id="address" value={address} onChange={handleOnchangeAddress} />
+                        <ButtonComponent
+                            onClick={handleUpdate}
+                            size={40}
+                            styleButton={{
+                                height: '30px',
+                                width: 'fit-content',
+                                borderRadius: '4px',
+                                padding: '4px 6px 6px'
+                            }}
+                            textbutton={'Cập nhật'}
+                            styletextbutton={{ color: 'rgb(26, 148, 255)', fontSize: '15px', fontWeight: '700' }}
+                        ></ButtonComponent>
+                    </WrapperInput>
+                    <WrapperInput>
+                        <WrapperLabel htmlFor="city">Thành Phố</WrapperLabel>
+                        <InputForm style={{ width: '300px' }} id="city" value={city} onChange={handleOnchangeCity} />
                         <ButtonComponent
                             onClick={handleUpdate}
                             size={40}

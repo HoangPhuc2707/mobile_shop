@@ -59,7 +59,7 @@ const OrderSuccess = () => {
                                     )
                                 })}
                                 <div>
-                                    <span style={{ marginTop: '4px', fontSize: '13px', color: '#242424', float: 'right' }}>Tổng tiền: {convertPrice(state?.totalPriceMemo)}</span>
+                                    <span style={{ marginTop: '4px', fontSize: '13px', color: '#242424', float: 'right', marginRight: '40px', color: 'red' }}>Tổng tiền: {convertPrice(state?.totalPriceMemo)}</span>
                                 </div>
                             </WrapperItemOrderInfo>
                         </WrapperContainer>

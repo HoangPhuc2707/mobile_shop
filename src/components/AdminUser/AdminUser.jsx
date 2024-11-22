@@ -31,6 +31,7 @@ const AdminUser = () => {
         createdAt: '',
         avatar: '',
         address: '',
+        city: '',
     })
 
     const [form] = Form.useForm();
@@ -88,7 +89,8 @@ const AdminUser = () => {
                 isAdmin: res?.data?.isAdmin,
                 createdAt: res?.data?.createdAt,
                 address: res?.data?.address,
-                avatar: res?.data?.avatar
+                avatar: res?.data?.avatar,
+                city: res?.data?.city,
             })
         }
         setIsPendingUpdate(false)
@@ -200,7 +202,7 @@ const AdminUser = () => {
 
     const columns = [
         {
-            title: 'Name',
+            title: 'Tên',
             dataIndex: 'name',
             sorter: (a, b) => a.name.length - b.name.length,
             ...getColumnSearchProps('name')
@@ -212,10 +214,16 @@ const AdminUser = () => {
             ...getColumnSearchProps('email')
         },
         {
-            title: 'Address',
+            title: 'Địa chỉ',
             dataIndex: 'address',
             sorter: (a, b) => a.address.length - b.address.length,
             ...getColumnSearchProps('address')
+        },
+        {
+            title: 'Thành phố',
+            dataIndex: 'city',
+            sorter: (a, b) => a.city.length - b.city.length,
+            ...getColumnSearchProps('city')
         },
         {
             title: 'Admin',
@@ -232,19 +240,19 @@ const AdminUser = () => {
             ],
         },
         {
-            title: 'Phone',
+            title: 'Số điện thoại',
             dataIndex: 'phone',
             sorter: (a, b) => a.phone - b.phone,
             ...getColumnSearchProps('phone')
         },
         {
-            title: 'CreatedAt',
+            title: 'Ngày tạo',
             dataIndex: 'createdAt',
             sorter: (a, b) => a.createdAt - b.createdAt,
             ...getColumnSearchProps('createdAt')
         },
         {
-            title: 'Action',
+            title: 'Hành động',
             dataIndex: 'action',
             render: renderAction
         },
@@ -278,6 +286,7 @@ const AdminUser = () => {
             phone: '',
             isAdmin: false,
             createdAt: '',
+            city: '',
         })
         form.resetFields()
     }
@@ -343,14 +352,14 @@ const AdminUser = () => {
                 <Loading isPending={isPendingUpdate || isPendingUpdated}>
                     <Form
                         name="basic"
-                        labelCol={{ span: 2 }}
-                        wrapperCol={{ span: 22 }}
+                        labelCol={{ span: 3 }}
+                        wrapperCol={{ span: 21 }}
                         onFinish={onUpdateUser}
                         autoComplete="on"
                         form={form}
                     >
                         <Form.Item
-                            label="Name"
+                            label="Tên"
                             name="name"
                             rules={[{ required: true, message: 'Please input your name!' }]}
                         >
@@ -365,26 +374,33 @@ const AdminUser = () => {
                             <InputComponent value={stateUserDetails['email']} onChange={handleOnChangeDetails} name="email" />
                         </Form.Item>
                         <Form.Item
-                            label="Phone"
+                            label="Số điện thoại"
                             name="phone"
                             rules={[{ required: true, message: 'Please input your phone!' }]}
                         >
                             <InputComponent value={stateUserDetails.phone} onChange={handleOnChangeDetails} name="phone" />
                         </Form.Item>
                         <Form.Item
-                            label="Address"
+                            label="Địa chỉ"
                             name="address"
                             rules={[{ required: true, message: 'Please input your address!' }]}
                         >
                             <InputComponent value={stateUserDetails.address} onChange={handleOnChangeDetails} name="address" />
                         </Form.Item>
                         <Form.Item
-                            label="Avatar"
+                            label="Thành phố"
+                            name="city"
+                            rules={[{ required: true, message: 'Please input your city!' }]}
+                        >
+                            <InputComponent value={stateUserDetails.city} onChange={handleOnChangeDetails} name="city" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Ảnh đại diện"
                             name="avatar"
                             rules={[{ required: true, message: 'Please input your avatar!' }]}
                         >
                             <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
-                                <Button>Select file</Button>
+                                <Button>Chọn file</Button>
                                 {stateUserDetails?.avatar && (
                                     <img src={stateUserDetails?.avatar} style={{
                                         height: '60px',
@@ -398,7 +414,7 @@ const AdminUser = () => {
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
                             <Button type="primary" htmlType="submit">
-                                Apply
+                                Lưu
                             </Button>
                         </Form.Item>
                     </Form>

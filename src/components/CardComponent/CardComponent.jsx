@@ -21,7 +21,7 @@ const CardComponent = (props) => {
             <img
                 src={logo}
                 style={{
-                    width: '68px', height: '14px', position: 'absolute', bottom: '92px', left: '7px',
+                    width: '68px', height: '14px', position: 'absolute', bottom: '110px', left: '7px',
                     borderTopLeftRadius: '3px'
                 }}
                 alt="official-logo"
@@ -31,7 +31,7 @@ const CardComponent = (props) => {
                 <span style={{ marginRight: '4px' }}>
                     <span>{rating}</span> <StarFilled style={{ fontSize: '12px', color: 'rgb(253, 216, 54' }} />
                 </span>
-                <WrapperStyleTextSell> | Đã bán {selled || 999}</WrapperStyleTextSell>
+                <WrapperStyleTextSell> | Đã bán {selled || 0}</WrapperStyleTextSell>
             </WrapperReportText>
             <WrapperPriceText>
                 <span>{convertPrice(price)}</span>

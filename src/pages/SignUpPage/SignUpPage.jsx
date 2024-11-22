@@ -58,8 +58,8 @@ const SignUpPage = () => {
             <div style={{ width: '800px', height: '445px', borderRadius: '6px', background: '#fff', display: 'flex' }}>
                 <WrapperContainerLeft>
                     <h1>Xin chào</h1>
-                    <p>Tạo tài khoản :</p>
-                    <InputForm style={{ marginBottom: '10px' }} placeholder="abc@gmail.com" value={email} onChange={handleOnchangeEmail} />
+                    <p>Tạo tài khoản</p>
+                    <InputForm style={{ marginBottom: '10px' }} placeholder="Abc@gmail.com" value={email} onChange={handleOnchangeEmail} />
                     <div style={{ position: 'relative' }}>
                         <span
                             onClick={() => setIsShowPassword(!isShowPassword)}
@@ -78,7 +78,7 @@ const SignUpPage = () => {
                             }
                         </span>
                         <InputForm
-                            placeholder="password"
+                            placeholder="Mật khẩu"
                             style={{ marginBottom: '10px' }}
                             type={isShowPassword ? "text" : "password"}
                             value={password}
@@ -103,7 +103,7 @@ const SignUpPage = () => {
                             }
                         </span>
                         <InputForm
-                            placeholder="confirm password"
+                            placeholder="Nhập lại mật khẩu"
                             style={{ marginBottom: '10px' }}
                             type={isShowConfirmPassword ? "text" : "password"}
                             value={confirmPassword}
@@ -132,7 +132,7 @@ const SignUpPage = () => {
                 </WrapperContainerLeft>
                 <WrapperContainerRight>
                     <Image src={imageLogin} preview={false} alt="image-login" height="203px" width="203px" />
-                    <h4>Mua sắm tại TiKi</h4>
+                    <h4>Mua sắm tại TIKKER</h4>
                 </WrapperContainerRight>
             </div>
         </div>

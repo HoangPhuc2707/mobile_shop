@@ -107,7 +107,7 @@ const DetailsOrderPage = () => {
             </WrapperAllPrice>
             <WrapperAllPrice>
               <WrapperItemLabel>Tổng cộng</WrapperItemLabel>
-              <WrapperItem><WrapperItem>{convertPrice(data?.totalPrice)}</WrapperItem></WrapperItem>
+              <WrapperItem>{convertPrice(data?.totalPrice)}</WrapperItem>
             </WrapperAllPrice>
           </WrapperStyleContent>
         </div>
