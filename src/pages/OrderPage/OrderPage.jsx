@@ -304,35 +304,35 @@ const OrderPage = () => {
                 <Loading isPending={isPending}>
                     <Form
                         name="basic"
-                        labelCol={{ span: 4 }}
-                        wrapperCol={{ span: 20 }}
+                        labelCol={{ span: 5 }}
+                        wrapperCol={{ span: 19 }}
                         // onFinish={onUpdateUser}
                         autoComplete="on"
                         form={form}
                     >
                         <Form.Item
-                            label="Name"
+                            label="Tên"
                             name="name"
                             rules={[{ required: true, message: 'Please input your name!' }]}
                         >
                             <InputComponent value={stateUserDetails['name']} onChange={handleOnChangeDetails} name="name" />
                         </Form.Item>
                         <Form.Item
-                            label="City"
+                            label="Thành phố"
                             name="city"
                             rules={[{ required: true, message: 'Please input your city!' }]}
                         >
                             <InputComponent value={stateUserDetails['city']} onChange={handleOnChangeDetails} name="city" />
                         </Form.Item>
                         <Form.Item
-                            label="Phone"
+                            label="Số điện thoại"
                             name="phone"
                             rules={[{ required: true, message: 'Please input your phone!' }]}
                         >
                             <InputComponent value={stateUserDetails.phone} onChange={handleOnChangeDetails} name="phone" />
                         </Form.Item>
                         <Form.Item
-                            label="Address"
+                            label="Địa chỉ"
                             name="address"
                             rules={[{ required: true, message: 'Please input your address!' }]}
                         >

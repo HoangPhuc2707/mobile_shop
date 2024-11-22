@@ -70,19 +70,21 @@ export const WrapperItem = styled.div`
   width: 200px;
   font-weight: bold;
   &:last-child {
-    color: red
+    color: red;
   }
 `
 export const WrapperItemLabel = styled.div`
   width: 200px;
-
-  &:last-child {
-    font-weight: bold;
-  }
+  padding-top: 4px;
+  
 `
 
 export const WrapperAllPrice = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end
+  align-items: flex-end;
+  border-top: 1px dashed #c8c8c8;
+  &:last-child {
+    font-weight: bold;
+  }
 `

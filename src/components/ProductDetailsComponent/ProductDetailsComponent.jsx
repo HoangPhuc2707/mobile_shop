@@ -1,7 +1,12 @@
 import { Col, Image, Rate, Row } from "antd";
 import React, { useEffect, useState } from "react";
-import imageProductSmall from "../../assets/images/imagesmall.webp";
-import { WrapperAddressProduct, WrapperInputNumber, WrapperPriceProduct, WrapperPriceTextProduct, WrapperQualityProduct, WrapperStyleColImage, WrapperStyleImageSmall, WrapperStyleNameProduct, WrapperStyleTextSell } from "./style";
+import imageProductSmall1 from "../../assets/images/iphone-16-pro-max-2.webp";
+import imageProductSmall2 from "../../assets/images/iphone-16-pro-max-3.webp";
+import imageProductSmall3 from "../../assets/images/iphone-16-pro-max-4.webp";
+import imageProductSmall4 from "../../assets/images/iphone-16-pro-max-5.webp";
+import imageProductSmall5 from "../../assets/images/iphone-16-pro-max-6.webp";
+import imageProductSmall6 from "../../assets/images/iphone-16-pro-max-7.webp";
+import { WrapperAddressProduct, WrapperInputNumber, WrapperPriceProduct, WrapperPriceTextProduct, WrapperQualityProduct, WrapperStyleColImage, WrapperStyleDescription, WrapperStyleImageSmall, WrapperStyleNameProduct, WrapperStyleTextSell } from "./style";
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import * as ProductService from '../../services/ProductService';
@@ -105,25 +110,25 @@ const ProductDetailsComponent = ({ idProduct }) => {
         <Loading isPending={isPending}>
             <Row style={{ padding: '16px', background: '#fff', borderRadius: '4px' }}>
                 <Col span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
-                    <Image src={productDetails?.image} alt="image product" preview={false} />
+                    <Image style={{ paddingLeft: '20px' }} src={productDetails?.image} alt="image product" preview={false} />
                     <Row style={{ justifyContent: 'space-between', paddingTop: '10px', paddingLeft: '5px', paddingRight: '5px' }}>
                         <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image product small" preview={false} />
+                            <WrapperStyleImageSmall src={imageProductSmall1} alt="image product small" preview={false} />
                         </WrapperStyleColImage>
                         <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image product small" preview={false} />
+                            <WrapperStyleImageSmall src={imageProductSmall2} alt="image product small" preview={false} />
                         </WrapperStyleColImage>
                         <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image product small" preview={false} />
+                            <WrapperStyleImageSmall src={imageProductSmall3} alt="image product small" preview={false} />
                         </WrapperStyleColImage>
                         <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image product small" preview={false} />
+                            <WrapperStyleImageSmall src={imageProductSmall4} alt="image product small" preview={false} />
                         </WrapperStyleColImage>
                         <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image product small" preview={false} />
+                            <WrapperStyleImageSmall src={imageProductSmall5} alt="image product small" preview={false} />
                         </WrapperStyleColImage>
                         <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image product small" preview={false} />
+                            <WrapperStyleImageSmall src={imageProductSmall6} alt="image product small" preview={false} />
                         </WrapperStyleColImage>
                     </Row>
                 </Col>
@@ -131,11 +136,14 @@ const ProductDetailsComponent = ({ idProduct }) => {
                     <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
                     <div>
                         <Rate allowHalf defaultValue={productDetails?.rating} value={productDetails?.rating} />
-                        <WrapperStyleTextSell> | Đã bán {productDetails?.selled || 999}</WrapperStyleTextSell>
+                        <WrapperStyleTextSell> | Đã bán {productDetails?.selled || 0}</WrapperStyleTextSell>
                     </div>
                     <WrapperPriceProduct>
                         <WrapperPriceTextProduct>{convertPrice(productDetails?.price)}</WrapperPriceTextProduct>
                     </WrapperPriceProduct>
+                    <WrapperStyleDescription>
+                        {productDetails?.description}
+                    </WrapperStyleDescription>
                     <WrapperAddressProduct>
                         <span>Giao đến</span>
                         <span className='address'>{user?.address}</span>
@@ -171,18 +179,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             ></ButtonComponent>
                             {errorLimitOrder && <div style={{ color: 'red' }}>Sản phẩm đã hết hàng</div>}
                         </div>
-                        <ButtonComponent
-                            size={40}
-                            styleButton={{
-                                background: '#fff',
-                                height: '48px',
-                                width: '220px',
-                                border: '1px solid rgb(13, 92, 182)',
-                                borderRadius: '4px',
-                            }}
-                            textbutton={'Mua trả sau'}
-                            styletextbutton={{ color: 'rgb(13, 92, 182)', fontSize: '15px' }}
-                        ></ButtonComponent>
+
                     </div>
                 </Col>
                 <CommentComponent dataHref={"https://developers.facebook.com/docs/plugins/comments#configurator"} width="1000" />

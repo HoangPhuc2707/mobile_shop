@@ -209,7 +209,7 @@ const AdminProduct = () => {
                             width: 90,
                         }}
                     >
-                        Search
+                        Tìm kiếm
                     </Button>
                     <Button
                         onClick={() => clearFilters && handleReset(clearFilters)}
@@ -218,7 +218,7 @@ const AdminProduct = () => {
                             width: 90,
                         }}
                     >
-                        Reset
+                        Xóa
                     </Button>
                 </Space>
             </div>
@@ -241,13 +241,13 @@ const AdminProduct = () => {
 
     const columns = [
         {
-            title: 'Name',
+            title: 'Tên',
             dataIndex: 'name',
             sorter: (a, b) => a.name.length - b.name.length,
             ...getColumnSearchProps('name')
         },
         {
-            title: 'Price',
+            title: 'Giá',
             dataIndex: 'price',
             sorter: (a, b) => a.price - b.price,
             filters: [
@@ -268,7 +268,7 @@ const AdminProduct = () => {
             },
         },
         {
-            title: 'Rating',
+            title: 'Đánh giá',
             dataIndex: 'rating',
             sorter: (a, b) => a.rating - b.rating,
             filters: [
@@ -289,12 +289,17 @@ const AdminProduct = () => {
             },
         },
         {
-            title: 'Type',
+            title: 'Loại',
             dataIndex: 'type',
             ...getColumnSearchProps('type')
         },
         {
-            title: 'Action',
+            title: 'Giảm giá',
+            dataIndex: 'discount',
+            ...getColumnSearchProps('discount')
+        },
+        {
+            title: 'Hành động',
             dataIndex: 'action',
             render: renderAction
         },
@@ -470,17 +475,17 @@ const AdminProduct = () => {
                         form={form}
                     >
                         <Form.Item
-                            label="Name"
+                            label="Tên"
                             name="name"
-                            rules={[{ required: true, message: 'Please input your name!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập tên!' }]}
                         >
                             <InputComponent value={stateProduct['name']} onChange={handleOnChange} name="name" />
                         </Form.Item>
 
                         <Form.Item
-                            label="Type"
+                            label="Loại"
                             name="type"
-                            rules={[{ required: true, message: 'Please input your type!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập loại!' }]}
                         >
                             <Select
                                 name="type"
@@ -491,55 +496,55 @@ const AdminProduct = () => {
                         </Form.Item>
                         {stateProduct.type === 'add_type' && (
                             <Form.Item
-                                label="New type"
+                                label="Loại mới"
                                 name="newType"
-                                rules={[{ required: true, message: 'Please input your new type!' }]}
+                                rules={[{ required: true, message: 'Vui lòng nhập loại mới!' }]}
                             >
                                 <InputComponent value={stateProduct.newType} onChange={handleOnChange} name="newType" />
                             </Form.Item>
                         )}
                         <Form.Item
-                            label="CountInStock"
+                            label="Số lượng"
                             name="countInStock"
-                            rules={[{ required: true, message: 'Please input your count inStock!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập số lượng!' }]}
                         >
                             <InputComponent value={stateProduct.countInStock} onChange={handleOnChange} name="countInStock" />
                         </Form.Item>
                         <Form.Item
-                            label="Price"
+                            label="Giá"
                             name="price"
-                            rules={[{ required: true, message: 'Please input your price!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập giá!' }]}
                         >
                             <InputComponent value={stateProduct.price} onChange={handleOnChange} name="price" />
                         </Form.Item>
                         <Form.Item
-                            label="Rating"
+                            label="Đánh giá"
                             name="rating"
-                            rules={[{ required: true, message: 'Please input your rating!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập đánh giá!' }]}
                         >
                             <InputComponent value={stateProduct.rating} onChange={handleOnChange} name="rating" />
                         </Form.Item>
                         <Form.Item
-                            label="Discount"
+                            label="Giảm giá"
                             name="discount"
-                            rules={[{ required: true, message: 'Please input your discount of product!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập giảm giá!' }]}
                         >
                             <InputComponent value={stateProduct.discount} onChange={handleOnChange} name="discount" />
                         </Form.Item>
                         <Form.Item
-                            label="Description"
+                            label="Mô tả"
                             name="description"
-                            rules={[{ required: true, message: 'Please input your description!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập mô tả!' }]}
                         >
                             <InputComponent value={stateProduct.description} onChange={handleOnChange} name="description" />
                         </Form.Item>
                         <Form.Item
-                            label="Image"
+                            label="Hình ảnh"
                             name="image"
-                            rules={[{ required: true, message: 'Please input your image!' }]}
+                            rules={[{ required: true, message: 'Vui lòng chọn hình ảnh !' }]}
                         >
                             <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
-                                <Button>Select file</Button>
+                                <Button>Chọn file</Button>
                                 {stateProduct?.image && (
                                     <img src={stateProduct?.image} style={{
                                         height: '60px',
@@ -551,9 +556,9 @@ const AdminProduct = () => {
                                 )}
                             </WrapperUploadFile>
                         </Form.Item>
-                        <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
+                        <Form.Item wrapperCol={{ offset: 16, span: 20 }}>
                             <Button type="primary" htmlType="submit">
-                                Submit
+                                Tạo sản phẩm
                             </Button>
                         </Form.Item>
                     </Form>
@@ -563,69 +568,69 @@ const AdminProduct = () => {
                 <Loading isPending={isPendingUpdate || isPendingUpdated}>
                     <Form
                         name="basic"
-                        labelCol={{ span: 2 }}
-                        wrapperCol={{ span: 22 }}
+                        labelCol={{ span: 3 }}
+                        wrapperCol={{ span: 21 }}
                         onFinish={onUpdateProduct}
                         autoComplete="on"
                         form={form}
                     >
                         <Form.Item
-                            label="Name"
+                            label="Tên"
                             name="name"
-                            rules={[{ required: true, message: 'Please input your name!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập tên!' }]}
                         >
                             <InputComponent value={stateProductDetails['name']} onChange={handleOnChangeDetails} name="name" />
                         </Form.Item>
 
                         <Form.Item
-                            label="Type"
+                            label="Loại"
                             name="type"
-                            rules={[{ required: true, message: 'Please input your type!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập loại!' }]}
                         >
                             <InputComponent value={stateProductDetails['type']} onChange={handleOnChangeDetails} name="type" />
                         </Form.Item>
                         <Form.Item
-                            label="CountInStock"
+                            label="Số lượng"
                             name="countInStock"
-                            rules={[{ required: true, message: 'Please input your count inStock!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập số lượng!' }]}
                         >
                             <InputComponent value={stateProductDetails.countInStock} onChange={handleOnChangeDetails} name="countInStock" />
                         </Form.Item>
                         <Form.Item
-                            label="Price"
+                            label="Giá"
                             name="price"
-                            rules={[{ required: true, message: 'Please input your price!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập giá!' }]}
                         >
                             <InputComponent value={stateProductDetails.price} onChange={handleOnChangeDetails} name="price" />
                         </Form.Item>
                         <Form.Item
-                            label="Rating"
+                            label="Đánh giá"
                             name="rating"
-                            rules={[{ required: true, message: 'Please input your rating!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập đánh giá!' }]}
                         >
                             <InputComponent value={stateProductDetails.rating} onChange={handleOnChangeDetails} name="rating" />
                         </Form.Item>
                         <Form.Item
-                            label="Discount"
+                            label="Giảm giá"
                             name="discount"
-                            rules={[{ required: true, message: 'Please input your discount of product!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập giảm giá!' }]}
                         >
                             <InputComponent value={stateProductDetails.discount} onChange={handleOnChangeDetails} name="discount" />
                         </Form.Item>
                         <Form.Item
-                            label="Description"
+                            label="Mô tả"
                             name="description"
-                            rules={[{ required: true, message: 'Please input your description!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập mô tả!' }]}
                         >
                             <InputComponent value={stateProductDetails.description} onChange={handleOnChangeDetails} name="description" />
                         </Form.Item>
                         <Form.Item
-                            label="Image"
+                            label="Hình ảnh"
                             name="image"
-                            rules={[{ required: true, message: 'Please input your image!' }]}
+                            rules={[{ required: true, message: 'Vui lòng chọn hình ảnh' }]}
                         >
                             <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
-                                <Button>Select file</Button>
+                                <Button>Chọn file</Button>
                                 {stateProductDetails?.image && (
                                     <img src={stateProductDetails?.image} style={{
                                         height: '60px',
@@ -639,7 +644,7 @@ const AdminProduct = () => {
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
                             <Button type="primary" htmlType="submit">
-                                Apply
+                                Lưu
                             </Button>
                         </Form.Item>
                     </Form>

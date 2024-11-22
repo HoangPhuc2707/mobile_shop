@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import TypeProduct from "../../components/TypeProduct/TypeProduct";
 import { WrapperButtonMore, WrapperProducts, WrapperTypeProduct } from "./style";
-import slider1 from '../../assets/images/slider1.webp';
-import slider2 from '../../assets/images/slider2.webp';
-import slider3 from '../../assets/images/slider3.webp';
+import slider1 from '../../assets/images/slider1.png';
+import slider2 from '../../assets/images/slider2.png';
+import slider3 from '../../assets/images/slider3.png';
+import slider4 from '../../assets/images/slider4.png';
 import SliderComponent from "../../components/SliderComponent/SliderComponent";
 import CardComponent from "../../components/CardComponent/CardComponent";
+import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import * as ProductService from "../../services/ProductService";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
@@ -16,7 +18,7 @@ const HomePage = () => {
     const searchProduct = useSelector((state) => state?.product?.search)
     const searchDebounce = useDebounce(searchProduct, 500)
     const [loading, setLoading] = useState(false)
-    const [limit, setLimit] = useState(6)
+    const [limit, setLimit] = useState(8)
     const [typeProducts, setTypeProducts] = useState([])
     const fetchProductAll = async (context) => {
         const limit = context?.queryKey && context?.queryKey[1]
@@ -57,7 +59,7 @@ const HomePage = () => {
             </div>
             <div className='body' style={{ width: '100%', backgroundColor: '#efefef' }}>
                 <div id="container" style={{ width: '1024px', height: '100%', margin: '0 auto' }}>
-                    <SliderComponent arrImages={[slider1, slider2, slider3]} />
+                    <SliderComponent arrImages={[slider1, slider2, slider3, slider4]} />
                     <WrapperProducts>
                         {products?.data?.map((product) => {
                             return (
@@ -88,9 +90,12 @@ const HomePage = () => {
                             }}
                             isDisabled={products?.total === products?.data?.length || products?.totalPage === 1}
                             styletextbutton={{ fontWeight: '500', color: products?.total === products?.data?.length && '#fff' }}
-                            onClick={() => setLimit((prev) => prev + 6)} />
+                            onClick={() => setLimit((prev) => prev + 4)} />
                     </div>
                 </div>
+            </div>
+            <div style={{ width: '100%', backgroundColor: '#efefef', display: 'flex', justifyContent: 'center', paddingTop: '10px', paddingBottom: '10px' }}>
+                <FooterComponent />
             </div>
         </Loading>
     );
