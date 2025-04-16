@@ -4,7 +4,7 @@ import { convertDataChart } from '../../utils';
 
 const PieChartComponent = (props) => {
   const data = convertDataChart(props.data, 'paymentMethod')
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  const COLORS = ['rgb(110, 186, 252)', '#00C49F', '#FFBB28', '#FF8042'];
 
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index, ...rests }) => {

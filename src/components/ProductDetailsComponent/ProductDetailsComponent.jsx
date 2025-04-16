@@ -144,11 +144,11 @@ const ProductDetailsComponent = ({ idProduct }) => {
                     <WrapperStyleDescription>
                         {productDetails?.description}
                     </WrapperStyleDescription>
-                    <WrapperAddressProduct>
+                    {/* <WrapperAddressProduct>
                         <span>Giao đến</span>
                         <span className='address'>{user?.address}</span>
                         <span className='change-address'>- Đổi địa chỉ</span>
-                    </WrapperAddressProduct>
+                    </WrapperAddressProduct> */}
                     <LikeButtonComponent dataHref={"https://developers.facebook.com/docs/plugins/"} />
                     <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
                         <div style={{ marginBottom: '10px' }}>Số lượng</div>
@@ -167,7 +167,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             <ButtonComponent
                                 size={40}
                                 styleButton={{
-                                    background: 'rgb(255, 57, 69)',
+                                    background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
                                     height: '48px',
                                     width: '220px',
                                     border: 'none',

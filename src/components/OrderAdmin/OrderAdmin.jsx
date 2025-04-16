@@ -9,7 +9,6 @@ import * as OrderService from '../../services/OrderService';
 import { useQuery } from "@tanstack/react-query";
 import { convertPrice } from "../../utils";
 import { orderContant } from '../../contant'
-import PieChartComponent from "./PieChart";
 
 const OrderAdmin = () => {
     const user = useSelector((state) => state?.user)
@@ -144,9 +143,6 @@ const OrderAdmin = () => {
     return (
         <div>
             <WrapperHeader>Quản lý đơn hàng</WrapperHeader>
-            <div style={{ height: 200, width: 200 }}>
-                <PieChartComponent data={orders?.data} />
-            </div>
             <div style={{ marginTop: '20px' }}>
                 <TableComponent columns={columns} isPending={isPendingOrders} data={dataTable} />
             </div>

@@ -310,7 +310,7 @@ const PaymentPage = () => {
                                     onClick={() => handleAddOrder()}
                                     size={40}
                                     styleButton={{
-                                        background: 'rgb(255, 57, 69)',
+                                        background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
                                         height: '48px',
                                         width: '360px',
                                         border: 'none',

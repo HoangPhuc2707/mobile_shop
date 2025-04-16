@@ -224,10 +224,10 @@ const OrderPage = () => {
                             {order?.orderItems?.map((order) => {
                                 return (
                                     <WrapperItemOrder key={order?.product}>
-                                        <div style={{ width: '290px', display: 'flex', alignItems: 'center', gap: 4 }}>
+                                        <div style={{ width: '260px', display: 'flex', alignItems: 'center', gap: 4 }}>
                                             <Checkbox onChange={onChange} value={order?.product} checked={listChecked.includes(order?.product)}></Checkbox>
                                             <img src={order?.image} alt="item-order" style={{ width: '77px', height: '79px', objectFit: 'cover' }} />
-                                            <div style={{ width: '260px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                            <div style={{ width: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                                 {order?.name}
                                             </div>
                                         </div>
@@ -287,7 +287,7 @@ const OrderPage = () => {
                             onClick={() => handleAddCard()}
                             size={40}
                             styleButton={{
-                                background: 'rgb(255, 57, 69)',
+                                background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
                                 height: '48px',
                                 width: '360px',
                                 border: 'none',

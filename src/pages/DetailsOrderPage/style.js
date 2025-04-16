@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const WrapperHeaderUser = styled.div`
   display: flex;
+  padding-top: 20px;
   align-items: center;
   justify-content: space-between;
 `

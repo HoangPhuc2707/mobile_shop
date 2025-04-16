@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const ParamFooter = styled.p`
     font-size: 12px;
 `;
