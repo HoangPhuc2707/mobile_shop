@@ -241,7 +241,7 @@ const AdminProduct = () => {
 
     const columns = [
         {
-            title: 'Tên',
+            title: 'Tên sản phẩm',
             dataIndex: 'name',
             sorter: (a, b) => a.name.length - b.name.length,
             ...getColumnSearchProps('name')
@@ -299,7 +299,7 @@ const AdminProduct = () => {
             ...getColumnSearchProps('discount')
         },
         {
-            title: 'Hành động',
+            title: 'Thao tác',
             dataIndex: 'action',
             render: renderAction
         },
@@ -448,14 +448,11 @@ const AdminProduct = () => {
     }
     return (
         <div>
-            <WrapperHeader>Quản lý sản phẩm</WrapperHeader>
-            <div style={{ marginTop: '10px' }}>
-                <Button style={{ height: '150px', width: '150px', borderRadius: '6px', borderStyle: 'dashed' }}
-                    onClick={() => setIsModalOpen(true)}>
-                    <PlusOutlined style={{ fontSize: '60px' }} />
-                </Button>
+            <div style={{ display: 'flex' }}>
+                <WrapperHeader>Quản lý sản phẩm</WrapperHeader>
+                <Button onClick={() => setIsModalOpen(true)}>Thêm sản phẩm</Button>
             </div>
-            <div style={{ marginTop: '20px' }}>
+            <div style={{ marginTop: '10px' }}>
                 <TableComponent handleDeleteMany={handleDeleteManyProducts} columns={columns} isPending={isPendingProducts} data={dataTable} onRow={(record, rowIndex) => {
                     return {
                         onClick: event => {
@@ -564,12 +561,12 @@ const AdminProduct = () => {
                     </Form>
                 </Loading>
             </ModalComponent>
-            <DrawerComponent title="Chi tiết sản phẩm" isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="90%">
+            <DrawerComponent title="Chi tiết sản phẩm" isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="40%">
                 <Loading isPending={isPendingUpdate || isPendingUpdated}>
                     <Form
                         name="basic"
-                        labelCol={{ span: 3 }}
-                        wrapperCol={{ span: 21 }}
+                        labelCol={{ span: 6 }}
+                        wrapperCol={{ span: 18 }}
                         onFinish={onUpdateProduct}
                         autoComplete="on"
                         form={form}

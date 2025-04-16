@@ -39,23 +39,26 @@ const TableComponent = (props) => {
 
     return (
         <Loading isPending={isPending}>
-            {rowSelectedKeys.length > 0 && (
-                <div style={{
-                    background: '#FF6347',
-                    color: '#fff',
-                    fontWeight: 'bold',
-                    padding: '10px',
-                    cursor: 'pointer',
-                    marginBottom: '10px',
-                    width: '100px',
-                    borderRadius: '4px',
-                }}
-                    onClick={handleDeleteAll}
-                >
-                    Xóa tất cả
-                </div>
-            )}
-            <Button style={{ marginBottom: '10px' }} onClick={exportExcel}>Xuất file Excel</Button>
+            <div style={{ display: 'flex', marginRight: '20px', justifyContent: rowSelectedKeys.length > 0 ? 'space-between' : 'flex-end' }}>
+                {rowSelectedKeys.length > 0 && (
+                    <div style={{
+                        width: '115px',
+                        color: 'red',
+                        border: '1px solid red',
+                        textAlign: 'center',
+                        fontWeight: 'bold',
+                        padding: '7px',
+                        cursor: 'pointer',
+                        marginBottom: '10px',
+                        borderRadius: '4px',
+                    }}
+                        onClick={handleDeleteAll}
+                    >
+                        Xóa tất cả
+                    </div>
+                )}
+                <Button style={{ marginBottom: '10px' }} onClick={exportExcel}>Xuất file Excel</Button>
+            </div>
             <Table
                 rowSelection={{
                     type: selectionType,
@@ -65,7 +68,7 @@ const TableComponent = (props) => {
                 dataSource={dataSource}
                 {...props}
             />
-        </Loading>
+        </Loading >
     );
 };
 

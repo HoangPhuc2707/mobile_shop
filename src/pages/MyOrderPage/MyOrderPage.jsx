@@ -7,7 +7,8 @@ import { WrapperContainer, WrapperFooterItem, WrapperHeaderItem, WrapperItemOrde
 import { convertPrice } from "../../utils";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMutationHooks } from "../../hooks/useMutationHook";
-import * as message from '../../components/Message/Message'
+import * as message from '../../components/Message/Message';
+import imgEmtyCart from '../../assets/images/icons8-clear-shopping-cart-96.png';
 
 const MyOrderPage = () => {
     const location = useLocation()
@@ -84,7 +85,7 @@ const MyOrderPage = () => {
         <Loading isPending={isPending || isPendingCancel}>
             <WrapperContainer>
                 <div style={{ height: '100%', width: '1024px', margin: '0 auto' }}>
-                    <h4 style={{ fontWeight: 'bold', margin: '0', padding: '10px 0' }}>Đơn hàng của tôi</h4>
+                    <h4 style={{ fontSize: '18px', margin: '0 10px 0 0', padding: '10px 0' }}>Đơn hàng của tôi</h4>
                     <WrapperListOrder>
                         {data?.map((order) => {
                             return (
@@ -139,6 +140,9 @@ const MyOrderPage = () => {
                             )
                         })}
                     </WrapperListOrder>
+
+                    <img style={{ display: data?.length === 0 ? 'block' : 'none', width: '200px', height: '200px', paddingBottom: '280px', marginLeft: '400px' }} src={imgEmtyCart} alt="imgEmtyCart" />
+
                 </div>
             </WrapperContainer>
         </Loading>

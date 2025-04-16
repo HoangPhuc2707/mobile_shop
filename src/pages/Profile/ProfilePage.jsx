@@ -86,18 +86,19 @@ const ProfilePage = () => {
                 <WrapperContentProfile>
                     <WrapperInput>
                         <WrapperLabel htmlFor="avatar">Ảnh đại diện</WrapperLabel>
+                        {avatar && (
+                            <img src={avatar} style={{
+                                height: '150px',
+                                width: '150px',
+                                borderRadius: '50%',
+                                objectFit: 'cover',
+                                marginRight: '20px'
+                            }} alt="avatar" />
+                        )}
                         <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
                             <Button icon={<UploadOutlined />}>Chọn file</Button>
                         </WrapperUploadFile>
-                        {avatar && (
-                            <img src={avatar} style={{
-                                height: '60px',
-                                width: '60px',
-                                borderRadius: '50%',
-                                objectFit: 'cover'
-                            }} alt="avatar" />
-                        )}
-                        {/* <InputForm style={{ width: '300px' }} id="avatar" value={avatar} onChange={handleOnchangeAvatar} /> */}
+
                         <ButtonComponent
                             onClick={handleUpdate}
                             size={40}

@@ -37,7 +37,6 @@ const DetailsOrderPage = () => {
     <Loading isPending={isPending}>
       <div style={{ width: '100%', height: '100%', background: '#f5f5fa' }}>
         <div style={{ width: '1024px', margin: '0 auto', height: '100%', paddingBottom: '10px' }}>
-          <h4 style={{ fontWeight: 'bold', margin: '0', padding: '10px 0' }}>Chi tiết đơn hàng</h4>
           <WrapperHeaderUser>
             <WrapperInfoUser>
               <WrapperLabel>Địa chỉ người nhận</WrapperLabel>

@@ -2,6 +2,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 export const WrapperSliderStyle = styled(Slider)`
+    cursor: pointer;
     & .slick-arrow.slick-prev {
         left: 12px;
         top: 50%;

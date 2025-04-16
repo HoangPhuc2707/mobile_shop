@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 export const WrapperHeader = styled.h1`
     color: #000;
-    font-size: 14px;
+    font-size: 24px;
+    margin: 0 10px 0 0;
 `
 
 export const WrapperUploadFile = styled(Upload)`

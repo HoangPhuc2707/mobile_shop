@@ -11,6 +11,7 @@ import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
 import MyOrderPage from "../pages/MyOrderPage/MyOrderPage";
 import DetailsOrderPage from "../pages/DetailsOrderPage/DetailsOrderPage";
+import NewsPage from "../pages/NewsPage/NewsPage";
 
 export const routes = [
     {
@@ -46,6 +47,11 @@ export const routes = [
     {
         path: '/product/:type',
         page: TypeProductPage,
+        isShowHeader: true
+    },
+    {
+        path: '/news',
+        page: NewsPage,
         isShowHeader: true
     },
     {

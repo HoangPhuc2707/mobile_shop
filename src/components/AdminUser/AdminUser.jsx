@@ -214,19 +214,19 @@ const AdminUser = () => {
             ...getColumnSearchProps('email')
         },
         {
-            title: 'Địa chỉ',
-            dataIndex: 'address',
-            sorter: (a, b) => a.address.length - b.address.length,
-            ...getColumnSearchProps('address')
+            title: 'Số điện thoại',
+            dataIndex: 'phone',
+            sorter: (a, b) => a.phone - b.phone,
+            ...getColumnSearchProps('phone')
         },
         {
-            title: 'Thành phố',
-            dataIndex: 'city',
-            sorter: (a, b) => a.city.length - b.city.length,
-            ...getColumnSearchProps('city')
+            title: 'Ngày tạo',
+            dataIndex: 'createdAt',
+            sorter: (a, b) => a.createdAt - b.createdAt,
+            ...getColumnSearchProps('createdAt')
         },
         {
-            title: 'Admin',
+            title: 'Chức vụ',
             dataIndex: 'isAdmin',
             filters: [
                 {
@@ -240,25 +240,13 @@ const AdminUser = () => {
             ],
         },
         {
-            title: 'Số điện thoại',
-            dataIndex: 'phone',
-            sorter: (a, b) => a.phone - b.phone,
-            ...getColumnSearchProps('phone')
-        },
-        {
-            title: 'Ngày tạo',
-            dataIndex: 'createdAt',
-            sorter: (a, b) => a.createdAt - b.createdAt,
-            ...getColumnSearchProps('createdAt')
-        },
-        {
-            title: 'Hành động',
+            title: 'Thao tác',
             dataIndex: 'action',
             render: renderAction
         },
     ];
     const dataTable = users?.data?.length && users?.data?.map((user) => {
-        return { ...user, key: user._id, isAdmin: user.isAdmin ? 'TRUE' : 'FALSE' }
+        return { ...user, key: user._id, isAdmin: user.isAdmin ? 'Quản lý' : 'Người dùng' }
     })
 
     useEffect(() => {
@@ -348,12 +336,12 @@ const AdminUser = () => {
                     }
                 }} />
             </div>
-            <DrawerComponent title="Chi tiết người dùng" isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="90%">
+            <DrawerComponent title="Chi tiết người dùng" isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="40%">
                 <Loading isPending={isPendingUpdate || isPendingUpdated}>
                     <Form
                         name="basic"
-                        labelCol={{ span: 3 }}
-                        wrapperCol={{ span: 21 }}
+                        labelCol={{ span: 6 }}
+                        wrapperCol={{ span: 18 }}
                         onFinish={onUpdateUser}
                         autoComplete="on"
                         form={form}

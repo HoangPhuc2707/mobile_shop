@@ -117,7 +117,7 @@ const SignUpPage = () => {
                             onClick={handleSignUp}
                             size={40}
                             styleButton={{
-                                background: 'rgb(255, 57, 69)',
+                                background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
                                 height: '48px',
                                 width: '100%',
                                 border: 'none',
@@ -132,7 +132,7 @@ const SignUpPage = () => {
                 </WrapperContainerLeft>
                 <WrapperContainerRight>
                     <Image src={imageLogin} preview={false} alt="image-login" height="203px" width="203px" />
-                    <h4>Mua sắm tại TIKKER</h4>
+                    <h4>Mua sắm tại Phone Plaza</h4>
                 </WrapperContainerRight>
             </div>
         </div>

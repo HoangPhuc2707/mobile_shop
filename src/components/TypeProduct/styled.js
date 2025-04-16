@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const WrapperType = styled.div`
-  padding: 10px 10px;
+  padding: 14px 20px;
   cursor: pointer;
+  color: #183544;
   &:hover {
-    background-color: var(--primary-color);
-    color: rgb(26, 148, 255);
-    border-radius: 4px;
+    background-color: #e9e9e9;
   }
 `

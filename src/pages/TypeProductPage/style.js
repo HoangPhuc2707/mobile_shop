@@ -11,8 +11,47 @@ export const WrapperProducts = styled.div`
 
 export const WrapperTypeProduct = styled.div`
     display: flex;
+    margin-left: 100px;
     align-items: center;
-    gap: 24px;
     justify-content: flex-start;
-    height: 44px;
+`
+
+export const WrapperSubMenuType = styled.div`
+  position: relative;
+  padding: 14px 20px;
+  cursor: pointer;
+  color: #fff;
+  &:hover {
+    background-color: #f18634;
+  }
+  &:hover .subMenuType{
+   display: block;
+  }
+`
+
+export const WrapperType = styled.div`
+  position: relative;
+  padding: 14px 20px;
+  cursor: pointer;
+  color: #fff;
+  &:hover {
+    background-color: #f18634;
+  }
+`
+
+export const SubMenuType = styled.div`
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 200px;
+    z-index: 10;
+    &:hover {
+      display: block;
+    }
 `

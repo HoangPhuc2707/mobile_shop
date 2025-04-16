@@ -5,6 +5,7 @@ import { convertPrice } from "../../utils";
 import Loading from "../../components/LoadingComponent/Loading";
 import { useLocation } from "react-router-dom";
 import { orderContant } from "../../contant";
+import iconsuccess from '../../assets/images/icons8-success-50.png';
 
 const OrderSuccess = () => {
     const order = useSelector((state) => state.order)
@@ -14,7 +15,13 @@ const OrderSuccess = () => {
         <div style={{ background: '#f5f5fa', with: '100%', height: '100vh' }}>
             <Loading isPending={false}>
                 <div style={{ height: '100%', width: '1024px', margin: '0 auto' }}>
-                    <h3 style={{ fontWeight: 'bold', margin: '0', padding: '10px 0' }}>Đơn hàng đặt thành công</h3>
+                    <div style={{ display: 'flex', gap: '5px', padding: '10px 0' }}>
+                        <img style={{ width: '18px', height: '18px' }} src={iconsuccess} alt="icon-success" />
+                        <h3 style={{ fontWeight: 'bold', margin: 0 }}>
+                            Đơn hàng đặt thành công!
+                        </h3>
+                    </div>
+
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <WrapperContainer style={{ marginRight: '40px' }}>
                             <WrapperInfo>
@@ -35,9 +42,9 @@ const OrderSuccess = () => {
                                 {state.orders?.map((order) => {
                                     return (
                                         <WrapperItemOrder key={order?.name}>
-                                            <div style={{ width: '400px', display: 'flex', alignItems: 'center', gap: 4 }}>
+                                            <div style={{ width: '350px', display: 'flex', alignItems: 'center', gap: 4 }}>
                                                 <img src={order.image} alt="item-order" style={{ width: '77px', height: '79px', objectFit: 'cover' }} />
-                                                <div style={{ width: '260px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                                <div style={{ width: '250px', fontSize: '13px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                                     {order?.name}
                                                 </div>
                                             </div>

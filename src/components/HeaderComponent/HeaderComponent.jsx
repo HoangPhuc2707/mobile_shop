@@ -1,8 +1,9 @@
 import { Badge, Col, Popover } from "antd";
 import React, { useEffect, useState } from "react";
-import { WrapperHeader, WrapperTextHeader, WrapperHeaderAccout, WrapperTextHeaderSmall, WrapperContentPopover } from "./style";
+import { WrapperHeader, WrapperLogoHeader, WrapperHeaderAccount, WrapperTextHeaderSmall, WrapperContentPopover } from "./style";
 import { UserOutlined, CaretDownOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import ButtonInputSearch from '../ButtonInputSearch/ButtonInputSearch';
+import logo from '../../assets/images/logo.jpg';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as UserService from '../../services/UserService';
@@ -10,7 +11,7 @@ import { resetUser } from "../../redux/slides/userSlide";
 import Loading from "../LoadingComponent/Loading";
 import { searchProduct } from "../../redux/slides/productSlide";
 
-const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
+const HeaderComponent = () => {
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
     const dispatch = useDispatch()
@@ -72,24 +73,23 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     }
 
     return (
-        <div style={{ width: '100%', background: 'rgb(26, 148, 255)', display: 'flex', justifyContent: 'center' }}>
-            <WrapperHeader style={{ justifyContent: isHiddenSearch && isHiddenCart ? 'space-between' : 'unset' }}>
+        <div style={{ width: '100%', background: '#fff', display: 'flex', justifyContent: 'center' }}>
+            <WrapperHeader>
                 <Col span={5}>
-                    <WrapperTextHeader onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>TIKKER</WrapperTextHeader>
+                    <WrapperLogoHeader onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+                        <img style={{ width: '200px' }} src={logo} alt="logo-image" />
+                    </WrapperLogoHeader>
                 </Col>
-                {!isHiddenSearch && (
-                    <Col span={13}>
-                        <ButtonInputSearch
-                            size="large"
-                            textbutton="Tìm kiếm"
-                            placeholder="Bạn đang tìm gì?"
-                            onChange={onSearch}
-                        />
-                    </Col>
-                )}
+                <Col span={13}>
+                    <ButtonInputSearch
+                        size="large"
+                        placeholder="Bạn đang tìm gì?"
+                        onChange={onSearch}
+                    />
+                </Col>
                 <Col span={6} style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
                     <Loading isPending={pending}>
-                        <WrapperHeaderAccout>
+                        <WrapperHeaderAccount>
                             {userAvatar ? (
                                 <img src={userAvatar} alt="avatar" style={{
                                     height: '30px',
@@ -103,29 +103,36 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                             {user?.access_token ? (
                                 <>
                                     <Popover content={content} trigger="click" open={isOpenPopup}>
-                                        <div style={{ cursor: 'pointer', paddingTop: '5px' }} onClick={() => setIsOpenPopup((prev) => !prev)}>{userName?.length ? userName : user?.email}</div>
+                                        <div
+                                            style={{
+                                                width: '70px',
+                                                cursor: 'pointer',
+                                                paddingTop: '5px',
+                                                overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                                whiteSpace: 'nowrap'
+                                            }}
+                                            onClick={() => setIsOpenPopup((prev) => !prev)}>
+                                            {userName?.length ? userName : user?.email}
+                                        </div>
                                     </Popover>
                                 </>
                             ) : (
-                                <div onClick={handleNavigateLogin} style={{ cursor: 'pointer' }}>
-                                    <WrapperTextHeaderSmall>Đăng nhập/Đăng ký</WrapperTextHeaderSmall>
-                                    <div>
-                                        <WrapperTextHeaderSmall>Tài khoản</WrapperTextHeaderSmall>
-                                        <CaretDownOutlined />
-                                    </div>
-                                </div>
+                                <WrapperTextHeaderSmall onClick={handleNavigateLogin} style={{ cursor: 'pointer' }}>
+                                    Đăng nhập
+                                </WrapperTextHeaderSmall>
                             )}
 
-                        </WrapperHeaderAccout>
+                        </WrapperHeaderAccount>
                     </Loading>
-                    {!isHiddenCart && (
-                        <div onClick={() => navigate('/order')} style={{ display: 'flex', cursor: 'pointer' }}>
-                            <Badge count={order?.orderItems?.length} size="small">
-                                <ShoppingCartOutlined style={{ fontSize: '30px', color: '#fff' }} />
-                            </Badge>
-                            <WrapperTextHeaderSmall>Giỏ hàng</WrapperTextHeaderSmall>
-                        </div>
-                    )}
+                    <div onClick={() => navigate('/order')} style={{ display: 'flex', cursor: 'pointer' }}>
+                        <Badge count={order?.orderItems?.length} size="small">
+                            <ShoppingCartOutlined style={{ fontSize: '30px', color: '#000', paddingRight: '5px' }} />
+                        </Badge>
+                        <WrapperTextHeaderSmall>
+                            Giỏ hàng
+                        </WrapperTextHeaderSmall>
+                    </div>
                 </Col>
             </WrapperHeader>
         </div>

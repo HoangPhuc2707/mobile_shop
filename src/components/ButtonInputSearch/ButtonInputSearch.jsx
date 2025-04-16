@@ -6,7 +6,7 @@ import ButtonComponent from "../ButtonComponent/ButtonComponent";
 const ButtonInputSearch = (props) => {
     const { size, placeholder, textbutton,
         backgroundColorInput = '#fff',
-        backgroundColorButton = 'rgb(13, 92, 182)',
+        backgroundColorButton = '#f18634',
         colorButton = '#fff',
     } = props;
     return (
@@ -26,6 +26,7 @@ const ButtonInputSearch = (props) => {
                 styleButton={{
                     borderRadius: '0', background: backgroundColorButton,
                     borderTopRightRadius: '5px', borderBottomRightRadius: '5px',
+                    paddingLeft: '30px', paddingRight: '25px',
                 }}
                 textbutton={textbutton}
                 styletextbutton={{ color: colorButton }}
