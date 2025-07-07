@@ -294,7 +294,7 @@ const AdminProduct = () => {
             ...getColumnSearchProps('type')
         },
         {
-            title: 'Giảm giá',
+            title: 'Giảm giá (%)',
             dataIndex: 'discount',
             ...getColumnSearchProps('discount')
         },
