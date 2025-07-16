@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { WrapperHeader, WrapperUploadFile } from "./style";
-import { PlusOutlined, DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import { Button, Form, Select, Space } from "antd";
 import TableComponent from "../TableComponent/TableComponent";
 import InputComponent from "../InputComponent/InputComponent";
@@ -167,8 +167,9 @@ const AdminProduct = () => {
     const renderAction = () => {
         return (
             <div>
-                <DeleteOutlined style={{ color: 'red', fontSize: '30px', cursor: 'pointer' }} onClick={() => setIsModalOpenDelete(true)} />
-                <EditOutlined style={{ color: 'orange', fontSize: '30px', cursor: 'pointer' }} onClick={handleDetailsProduct} />
+                <span style={{ color: '#3498db', cursor: 'pointer', paddingRight: '5px' }} onClick={() => setIsModalOpenDelete(true)}>Xóa</span>
+                |
+                <span style={{ color: '#3498db', cursor: 'pointer', paddingLeft: '5px' }} onClick={handleDetailsProduct}>Sửa</span>
             </div>
         )
     }
