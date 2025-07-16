@@ -1,5 +1,4 @@
-import React, { PureComponent } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+// import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Col, Row } from "antd";
 import { DashboardCard, DashboardCardBg, DashboardCardData, DashboardCardTittle } from "./style";
 import * as UserService from '../../services/UserService';
@@ -12,6 +11,7 @@ import iconcard2 from '../../assets/images/icons8-product-60.png';
 import iconcard3 from '../../assets/images/icons8-cart-48.png';
 import PieChartComponent from '../OrderAdmin/PieChart';
 import { useInView } from 'react-intersection-observer';
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
 
 
 const AdminDashboard = () => {
@@ -71,6 +71,21 @@ const AdminDashboard = () => {
         return null;
     };
 
+    // Tạo data cho BarChart: số lượng sản phẩm và số lượng đã bán theo từng loại
+    const data = Array.isArray(products?.data)
+        ? products.data.reduce((acc, product) => {
+            const type = product.type || 'Khác';
+            const found = acc.find(item => item.type === type);
+            if (found) {
+                found.countInStock += product.countInStock;
+                found.selled += product.selled || 0;
+            } else {
+                acc.push({ type, countInStock: product.countInStock, selled: product.selled || 0 });
+            }
+            return acc;
+        }, [])
+        : [];
+
     return (
         <>
             <Row >
@@ -121,7 +136,7 @@ const AdminDashboard = () => {
                 </Col>
             </Row>
             <div style={{ display: 'flex', gap: '20px', marginTop: '40px', marginRight: '30px' }}>
-                <div style={{ width: '66%', paddingRight: '10px', backgroundColor: '#fff' }}>
+                {/* <div style={{ width: '66%', paddingRight: '10px', backgroundColor: '#fff' }}>
                     <h2 style={{ marginLeft: '20px', color: 'rgb(99, 99, 99)', fontSize: '16px' }}>Số Lượng Sản Phẩm</h2>
                     <div style={{ width: '100%', height: 300 }}>
                         <ResponsiveContainer>
@@ -142,6 +157,18 @@ const AdminDashboard = () => {
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
+                </div> */}
+                <div style={{ width: '66%', paddingRight: '10px', backgroundColor: '#fff' }}>
+                    <h2 style={{ marginLeft: '20px', color: 'rgb(99, 99, 99)', fontSize: '16px' }}>Số Lượng Sản Phẩm</h2>
+                    <BarChart width={680} height={250} data={data}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="type" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="countInStock" fill="#1677ff" name="Tồn kho" />
+                        <Bar dataKey="selled" fill="#6EBAFC" name="Đã bán" />
+                    </BarChart>
                 </div>
                 <div style={{ width: '32%', backgroundColor: '#fff' }}>
                     <h2 style={{ marginLeft: '20px', color: 'rgb(99, 99, 99)', fontSize: '16px' }}>Phương thức thanh toán</h2>
