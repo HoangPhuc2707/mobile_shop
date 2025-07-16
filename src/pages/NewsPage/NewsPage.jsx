@@ -72,7 +72,7 @@ const NewsPage = () => {
                     </Col>
                     <Col span={7}>
                         <NewsTittle>Mua Samsung Galaxy Z Fold6 và Z Flip6 ở đâu?</NewsTittle>
-                        <NewsDate>06/01/2024</NewsDate>
+                        <NewsDate>06/01/2025</NewsDate>
                         <NewsContent>Z Flip 6 trước đây được cho là sẽ có các màu Xanh nhạt, Xanh lá nhạt,
                             Bạc, Vàng và các tùy chọn này vẫn được leaker xác nhận. Tuy nhiên,
                             Young làm rõ ràng hơn các tùy chọn Xanh lá nhạt sẽ được gọi là “Mint”,
@@ -95,7 +95,7 @@ const NewsPage = () => {
                                 thống cửa hàng Tablet Plaza trên toàn quốc để được đổi sang chiếc củ,
                             </ListNewsContent>
                         </WrapperListNewsTittle>
-                        <ListNewsDate>10/04/2024</ListNewsDate>
+                        <ListNewsDate>10/04/2025</ListNewsDate>
                     </ListNews>
                     <ListNews>
                         <ListNewsImg src={imgListNews2} alt="imgListNews2" />
@@ -106,7 +106,7 @@ const NewsPage = () => {
                                 Kaizen - "Siêu Đỉnh" đến từ Tablet Plaza!
                             </ListNewsContent>
                         </WrapperListNewsTittle>
-                        <ListNewsDate>19/09/2024</ListNewsDate>
+                        <ListNewsDate>19/09/2025</ListNewsDate>
                     </ListNews>
                     <ListNews>
                         <ListNewsImg src={imgListNews3} alt="imgListNews3" />
@@ -118,19 +118,19 @@ const NewsPage = () => {
                                 trình săn sale cuối tuần với vô vàn deal
                             </ListNewsContent>
                         </WrapperListNewsTittle>
-                        <ListNewsDate>05/02/2024</ListNewsDate>
+                        <ListNewsDate>05/02/2025</ListNewsDate>
                     </ListNews>
                     <ListNews>
                         <ListNewsImg src={imgListNews4} alt="imgListNews4" />
-                        <ListNewsTittle>Cách xem trực tiếp sự kiện Galaxy Unpacked 2024 ra mắt Galaxy S24 Series
+                        <ListNewsTittle>Cách xem trực tiếp sự kiện Galaxy Unpacked 2025 ra mắt Galaxy S24 Series
                         </ListNewsTittle>
                         <WrapperListNewsTittle>
-                            <ListNewsContent>Samsung sẽ giới thiệu dòng Galaxy S24 mới trong sự kiện Galaxy Unpacked 2024 diễn ra 1h sáng ngày 18/1
-                                . Samsung sẽ tổ chức sự kiện Unpacked 2024 ra mắt điện thoại Galaxy mới vào 1h sáng ngày
+                            <ListNewsContent>Samsung sẽ giới thiệu dòng Galaxy S24 mới trong sự kiện Galaxy Unpacked 2025 diễn ra 1h sáng ngày 18/1
+                                . Samsung sẽ tổ chức sự kiện Unpacked 2025 ra mắt điện thoại Galaxy mới vào 1h sáng ngày
                                 18/1 tại trung tâm SAP, San Jos
                             </ListNewsContent>
                         </WrapperListNewsTittle>
-                        <ListNewsDate>17/01/2024</ListNewsDate>
+                        <ListNewsDate>17/01/2025</ListNewsDate>
                     </ListNews>
                     <ListNews>
                         <ListNewsImg src={imgListNews5} alt="imgListNews5" />
@@ -140,7 +140,7 @@ const NewsPage = () => {
                                 Samsung, Laptop, máy tính bảng, đồng hồ thông minh, phụ kiện. Ngày 26.06.2023 hãy nhanh chân đến Tablet Plaza gần bạn để sở hữu ngay
                             </ListNewsContent>
                         </WrapperListNewsTittle>
-                        <ListNewsDate>05/08/2024</ListNewsDate>
+                        <ListNewsDate>05/08/2025</ListNewsDate>
                     </ListNews>
                     <ListNews>
                         <ListNewsImg src={imgListNews6} alt="imgListNews6" />
@@ -149,7 +149,7 @@ const NewsPage = () => {
                             <ListNewsContent>Đến Phone Plaza săn sale cuối tuần với hàng loạt ưu đãi dành tặng cho khách hàng.
                             </ListNewsContent>
                         </WrapperListNewsTittle>
-                        <ListNewsDate>05/02/2024</ListNewsDate>
+                        <ListNewsDate>05/02/2025</ListNewsDate>
                     </ListNews>
                 </WrapperListNews>
             </div>

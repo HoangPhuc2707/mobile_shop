@@ -151,7 +151,7 @@ const AdminUser = () => {
             >
                 <InputComponent
                     ref={searchInput}
-                    placeholder={`Search ${dataIndex}`}
+                    placeholder={`Nhập ${dataIndex}`}
                     value={selectedKeys[0]}
                     onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                     onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -170,7 +170,7 @@ const AdminUser = () => {
                             width: 90,
                         }}
                     >
-                        Search
+                        Tìm kiếm
                     </Button>
                     <Button
                         onClick={() => clearFilters && handleReset(clearFilters)}
@@ -179,7 +179,7 @@ const AdminUser = () => {
                             width: 90,
                         }}
                     >
-                        Reset
+                        Xóa
                     </Button>
                 </Space>
             </div>
@@ -388,16 +388,17 @@ const AdminUser = () => {
                             rules={[{ required: true, message: 'Please input your avatar!' }]}
                         >
                             <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
-                                <Button>Chọn file</Button>
                                 {stateUserDetails?.avatar && (
                                     <img src={stateUserDetails?.avatar} style={{
                                         height: '60px',
                                         width: '60px',
                                         borderRadius: '50%',
                                         objectFit: 'cover',
-                                        marginLeft: '20px'
+                                        marginLeft: '20px',
+                                        marginRight: '20px'
                                     }} alt="avatar" />
                                 )}
+                                <Button>Chọn file</Button>
                             </WrapperUploadFile>
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 20, span: 16 }}>

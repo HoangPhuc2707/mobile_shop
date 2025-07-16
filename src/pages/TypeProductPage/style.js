@@ -22,7 +22,7 @@ export const WrapperSubMenuType = styled.div`
   cursor: pointer;
   color: #fff;
   &:hover {
-    background-color: #f18634;
+    background: linear-gradient(138deg, #FF5A57, #E02F75);
   }
   &:hover .subMenuType{
    display: block;
@@ -35,7 +35,7 @@ export const WrapperType = styled.div`
   cursor: pointer;
   color: #fff;
   &:hover {
-    background-color: #f18634;
+    background: linear-gradient(138deg, #FF5A57, #E02F75);
   }
 `
 

@@ -248,8 +248,8 @@ const PaymentPage = () => {
                                 <div>
                                     <Lable>Chọn phương thức giao hàng</Lable>
                                     <WrapperRadio onChange={handleDelivery} value={delivery}>
-                                        <Radio value="fast"><span style={{ color: '#ea8500', fontWeight: 'bold' }}>FAST</span> Giao hàng tiết kiệm</Radio>
-                                        <Radio value="gojek"><span style={{ color: '#ea8500', fontWeight: 'bold' }}>GO_JEK</span> Giao hàng tiết kiệm</Radio>
+                                        <Radio value="fast"><span style={{ color: '#FF5A57', fontWeight: 'bold' }}>FAST</span> Giao hàng tiết kiệm</Radio>
+                                        <Radio value="gojek"><span style={{ color: '#FF5A57', fontWeight: 'bold' }}>GO_JEK</span> Giao hàng tiết kiệm</Radio>
                                     </WrapperRadio>
                                 </div>
                             </WrapperInfo>
@@ -310,7 +310,7 @@ const PaymentPage = () => {
                                     onClick={() => handleAddOrder()}
                                     size={40}
                                     styleButton={{
-                                        background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
+                                        background: 'linear-gradient(138deg, #FF5A57, #E02F75)',
                                         height: '48px',
                                         width: '360px',
                                         border: 'none',

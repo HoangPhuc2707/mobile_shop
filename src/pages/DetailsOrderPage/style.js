@@ -10,7 +10,7 @@ export const WrapperHeaderUser = styled.div`
 export const WrapperInfoUser = styled.div`
   .name-info {
     font-size: 13px;
-    color: rgb(36, 36, 36);
+    color: #FF5A57;
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -20,13 +20,13 @@ export const WrapperInfoUser = styled.div`
     margin-top: 8px;
   }
   .name-delivery {
-    color: rgb(234, 133, 0); 
+    color: #FF5A57; 
     font-weight: bold;
     text-transform: uppercase;
   }
   .status-payment {
     margin-top: 8px;
-    color: rgb(234, 133, 0); 
+    color: #FF5A57; 
   }
 `
 
@@ -52,7 +52,7 @@ export const WrapperStyleContent = styled.div`
   gap: 10px;
   margin-top: 20px;
   padding: 10px;
-  padding-bottom: 35px;
+  padding-bottom: 20px;
 `
 
 export const WrapperProduct = styled.div`
@@ -69,7 +69,6 @@ export const WrapperNameProduct = styled.div`
 
 export const WrapperItem = styled.div`
   width: 200px;
-  font-weight: bold;
   &:last-child {
     color: red;
   }

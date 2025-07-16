@@ -43,8 +43,8 @@ const TableComponent = (props) => {
                 {rowSelectedKeys.length > 0 && (
                     <div style={{
                         width: '115px',
-                        color: 'red',
-                        border: '1px solid red',
+                        background: 'linear-gradient(138deg, #FF5A57, #E02F75)',
+                        color: 'white',
                         textAlign: 'center',
                         fontWeight: 'bold',
                         padding: '7px',
@@ -66,6 +66,7 @@ const TableComponent = (props) => {
                 }}
                 columns={columns}
                 dataSource={dataSource}
+                // scroll={{ x: 1200 }}
                 {...props}
             />
         </Loading >

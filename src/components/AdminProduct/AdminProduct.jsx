@@ -190,7 +190,7 @@ const AdminProduct = () => {
             >
                 <InputComponent
                     ref={searchInput}
-                    placeholder={`Search ${dataIndex}`}
+                    placeholder={`Nhập ${dataIndex}`}
                     value={selectedKeys[0]}
                     onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                     onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -627,16 +627,18 @@ const AdminProduct = () => {
                             rules={[{ required: true, message: 'Vui lòng chọn hình ảnh' }]}
                         >
                             <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
-                                <Button>Chọn file</Button>
                                 {stateProductDetails?.image && (
                                     <img src={stateProductDetails?.image} style={{
                                         height: '60px',
                                         width: '60px',
-                                        borderRadius: '50%',
+                                        border: '1px solid #ccc',
+                                        borderRadius: '3px',
                                         objectFit: 'cover',
-                                        marginLeft: '20px'
+                                        marginLeft: '20px',
+                                        marginRight: '20px'
                                     }} alt="avatar" />
                                 )}
+                                <Button>Chọn file</Button>
                             </WrapperUploadFile>
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 20, span: 16 }}>

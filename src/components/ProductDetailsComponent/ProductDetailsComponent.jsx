@@ -111,7 +111,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
             <Row style={{ padding: '16px', background: '#fff', borderRadius: '4px' }}>
                 <Col span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
                     <Image style={{ paddingLeft: '20px' }} src={productDetails?.image} alt="image product" preview={false} />
-                    <Row style={{ justifyContent: 'space-between', paddingTop: '10px', paddingLeft: '5px', paddingRight: '5px' }}>
+                    {/* <Row style={{ justifyContent: 'space-between', paddingTop: '10px', paddingLeft: '5px', paddingRight: '5px' }}>
                         <WrapperStyleColImage span={4}>
                             <WrapperStyleImageSmall src={imageProductSmall1} alt="image product small" preview={false} />
                         </WrapperStyleColImage>
@@ -130,7 +130,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         <WrapperStyleColImage span={4}>
                             <WrapperStyleImageSmall src={imageProductSmall6} alt="image product small" preview={false} />
                         </WrapperStyleColImage>
-                    </Row>
+                    </Row> */}
                 </Col>
                 <Col span={14} style={{ paddingLeft: '10px' }}>
                     <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
@@ -167,7 +167,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             <ButtonComponent
                                 size={40}
                                 styleButton={{
-                                    background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
+                                    background: 'linear-gradient(138deg, #FF5A57, #E02F75)',
                                     height: '48px',
                                     width: '220px',
                                     border: 'none',

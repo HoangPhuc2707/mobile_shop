@@ -1,15 +1,17 @@
 import React, { useMemo } from 'react'
 import { WrapperAllPrice, WrapperContentInfo, WrapperHeaderUser, WrapperInfoUser, WrapperItem, WrapperItemLabel, WrapperLabel, WrapperNameProduct, WrapperProduct, WrapperStyleContent } from './style'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import * as OrderService from '../../services/OrderService';
 import { useQuery } from '@tanstack/react-query';
 import { orderContant } from '../../contant';
 import { convertPrice } from '../../utils';
 import Loading from '../../components/LoadingComponent/Loading';
+import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 
 const DetailsOrderPage = () => {
   const params = useParams()
   const location = useLocation()
+  const navigate = useNavigate()
   const { state } = location
   const { id } = params
 
@@ -108,6 +110,19 @@ const DetailsOrderPage = () => {
               <WrapperItemLabel>Tổng cộng</WrapperItemLabel>
               <WrapperItem>{convertPrice(data?.totalPrice)}</WrapperItem>
             </WrapperAllPrice>
+            <div>
+              <ButtonComponent
+                size={40}
+                styleButton={{
+                  height: '36px',
+                  border: '1px solid #FF5A57',
+                  borderRadius: '4px'
+                }}
+                onClick={() => navigate('/my-order')}
+                textbutton={'Trở về'}
+                styletextbutton={{ color: '#FF5A57', fontSize: '14px' }}
+              ></ButtonComponent>
+            </div>
           </WrapperStyleContent>
         </div>
       </div>

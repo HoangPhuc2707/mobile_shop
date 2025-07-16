@@ -287,7 +287,7 @@ const OrderPage = () => {
                             onClick={() => handleAddCard()}
                             size={40}
                             styleButton={{
-                                background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
+                                background: 'linear-gradient(138deg, #FF5A57, #E02F75)',
                                 height: '48px',
                                 width: '360px',
                                 border: 'none',
