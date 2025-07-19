@@ -120,7 +120,7 @@ const SignInPage = () => {
                 </WrapperContainerLeft>
                 <WrapperContainerRight>
                     <Image src={imageLogin} preview={false} alt="image-login" height="203px" width="203px" />
-                    <h4>Mua sắm tại Phone Plaza</h4>
+                    <h4>Mua sắm tại Cell Plaza</h4>
                 </WrapperContainerRight>
             </div>
         </div>

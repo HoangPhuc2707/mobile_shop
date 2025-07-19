@@ -136,7 +136,7 @@ const NewsPage = () => {
                         <ListNewsImg src={imgListNews5} alt="imgListNews5" />
                         <ListNewsTittle>GIỜ VÀNG GIÁ SỐC 26.06</ListNewsTittle>
                         <WrapperListNewsTittle>
-                            <ListNewsContent>Cùng Phone Plaza đón Siêu Sale " Giờ Vàng Giá Sốc " với hàng loạt ưu đãi dành cho các sản phẩm điện thoại Apple,
+                            <ListNewsContent>Cùng Cell Plaza đón Siêu Sale " Giờ Vàng Giá Sốc " với hàng loạt ưu đãi dành cho các sản phẩm điện thoại Apple,
                                 Samsung, Laptop, máy tính bảng, đồng hồ thông minh, phụ kiện. Ngày 26.06.2023 hãy nhanh chân đến Tablet Plaza gần bạn để sở hữu ngay
                             </ListNewsContent>
                         </WrapperListNewsTittle>
@@ -146,7 +146,7 @@ const NewsPage = () => {
                         <ListNewsImg src={imgListNews6} alt="imgListNews6" />
                         <ListNewsTittle>SĂN SALE CUỐI TUẦN – TƯNG BỪNG GIÁ TỐT</ListNewsTittle>
                         <WrapperListNewsTittle>
-                            <ListNewsContent>Đến Phone Plaza săn sale cuối tuần với hàng loạt ưu đãi dành tặng cho khách hàng.
+                            <ListNewsContent>Đến Cell Plaza săn sale cuối tuần với hàng loạt ưu đãi dành tặng cho khách hàng.
                             </ListNewsContent>
                         </WrapperListNewsTittle>
                         <ListNewsDate>05/02/2025</ListNewsDate>

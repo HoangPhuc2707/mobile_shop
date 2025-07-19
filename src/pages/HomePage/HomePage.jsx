@@ -125,7 +125,7 @@ const HomePage = () => {
                         <span style={{ color: '#FF5A57' }}>Giá Cả Hợp Lý!</span>
                     </h2>
                     <p style={{ color: 'gray' }}>
-                        Tại Phone Plaza, chúng tôi mang đến cho bạn những sản phẩm điện thoại tốt nhất với
+                        Tại Cell Plaza, chúng tôi mang đến cho bạn những sản phẩm điện thoại tốt nhất với
                         mức giá cạnh tranh. Khám phá ngay bộ sưu tập đa dạng và tìm kiếm chiếc điện thoại
                         hoàn hảo cho bạn!
                     </p>
