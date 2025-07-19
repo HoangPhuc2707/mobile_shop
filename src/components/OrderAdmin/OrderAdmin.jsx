@@ -13,6 +13,12 @@ import ButtonComponent from "../ButtonComponent/ButtonComponent";
 
 const OrderAdmin = () => {
     const user = useSelector((state) => state?.user)
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [isPaid, setIsPaid] = useState(false);
+    const [isDelivered, setIsDelivered] = useState(false);
+    const [showDialog, setShowDialog] = useState(false);
+    const [showDetailDialog, setShowDetailDialog] = useState(false);
+    const [detailOrder, setDetailOrder] = useState(null);
 
     const getAllOrder = async () => {
         const res = await OrderService.getAllOrder(user?.access_token)
@@ -81,16 +87,16 @@ const OrderAdmin = () => {
         },
     });
 
-    const [selectedOrder, setSelectedOrder] = useState(null);
-    const [isPaid, setIsPaid] = useState(false);
-    const [isDelivered, setIsDelivered] = useState(false);
-    const [showDialog, setShowDialog] = useState(false);
-
     const handleApproveClick = (order) => {
         setSelectedOrder(order);
         setIsPaid(order.isPaid === 'Đã thanh toán');
         setIsDelivered(order.isDelivered === 'Đã giao hàng');
         setShowDialog(true);
+    };
+
+    const handleShowDetail = (order) => {
+        setDetailOrder(order);
+        setShowDetailDialog(true);
     };
 
     const handleSaveStatus = async () => {
@@ -111,24 +117,17 @@ const OrderAdmin = () => {
         setSelectedOrder(null);
     };
 
+    const handleCancelDetailDialog = () => {
+        setShowDetailDialog(false);
+        setDetailOrder(null);
+    };
+
     const columns = [
         {
             title: 'Tên',
             dataIndex: 'userName',
             sorter: (a, b) => a.userName.length - b.userName.length,
             ...getColumnSearchProps('userName')
-        },
-        {
-            title: 'Địa chỉ giao hàng',
-            dataIndex: 'address',
-            sorter: (a, b) => a.address.length - b.address.length,
-            ...getColumnSearchProps('address')
-        },
-        {
-            title: 'Ngày tạo',
-            dataIndex: 'createdAt',
-            sorter: (a, b) => a.createdAt - b.createdAt,
-            ...getColumnSearchProps('createdAt')
         },
         {
             title: 'Phương thức thanh toán',
@@ -149,19 +148,26 @@ const OrderAdmin = () => {
             ...getColumnSearchProps('isDelivered')
         },
         {
-            title: 'Tổng tiền',
-            dataIndex: 'totalPrice',
-            sorter: (a, b) => a.totalPrice.length - b.totalPrice.length,
-            ...getColumnSearchProps('totalPrice')
+            title: 'Ngày tạo',
+            dataIndex: 'createdAt',
+            sorter: (a, b) => a.createdAt - b.createdAt,
+            ...getColumnSearchProps('createdAt')
         },
         {
             title: 'Thao tác',
             dataIndex: 'action',
             render: (_, record) => (
-                <span
-                    style={{ color: '#3498db', cursor: 'pointer', fontWeight: 500 }}
-                    onClick={() => handleApproveClick(record)}
-                >Duyệt</span>
+                <div style={{ display: 'flex', gap: 12 }}>
+                    <span
+                        style={{ color: '#3498db', cursor: 'pointer', fontWeight: 500 }}
+                        onClick={() => handleShowDetail(record)}
+                    >Xem</span>
+                    |
+                    <span
+                        style={{ color: '#3498db', cursor: 'pointer', fontWeight: 500 }}
+                        onClick={() => handleApproveClick(record)}
+                    >Duyệt</span>
+                </div>
             )
         }
     ];
@@ -235,6 +241,73 @@ const OrderAdmin = () => {
                                 }}
                                 textbutton={'Lưu'}
                                 styletextbutton={{ color: 'white', fontSize: '14px' }}
+                            ></ButtonComponent>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* Dialog xem chi tiết đơn hàng */}
+            {showDetailDialog && detailOrder && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    background: 'rgba(0,0,0,0.3)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 9999
+                }}>
+                    <div style={{ background: '#fff', padding: 24, borderRadius: 8, minWidth: 420, maxWidth: 600, boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+                        <h3 style={{ margin: 0, marginBottom: 16 }}>Chi tiết đơn hàng</h3>
+                        <div style={{ marginBottom: 16 }}>
+                            <div><b>Người nhận:</b> {detailOrder.userName}</div>
+                            <div><b>Địa chỉ:</b> {detailOrder.address}</div>
+                            <div><b>Số điện thoại:</b> 0{detailOrder.phone}</div>
+                            <div><b>Ngày tạo:</b> {detailOrder.createdAt}</div>
+                            <div><b>Phương thức thanh toán:</b> {detailOrder.paymentMethod}</div>
+                        </div>
+                        <div style={{ marginBottom: 16 }}>
+                            <b>Danh sách sản phẩm:</b>
+                            <div style={{ maxHeight: 260, overflowY: 'auto', marginTop: 8 }}>
+                                {detailOrder.orderItems && detailOrder.orderItems.length > 0 ? (
+                                    detailOrder.orderItems.map((item, idx) => {
+                                        const discountAmount = item.discount ? (item.price * item.amount * item.discount) / 100 : 0;
+                                        return (
+                                            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid #eee', padding: '8px 0' }}>
+                                                <img src={item.image} alt={item.name} style={{ width: 56, height: 56, objectFit: 'cover', borderRadius: 4 }} />
+                                                <div style={{ flex: 1 }}>
+                                                    <div><b>{item.name}</b></div>
+                                                    <div>Số lượng: {item.amount}</div>
+                                                    <div>Giá: {convertPrice(item.price)}</div>
+                                                    {item.discount ? (
+                                                        <div>Giảm giá: {item.discount}% (-{convertPrice(discountAmount)})</div>
+                                                    ) : null}
+                                                </div>
+                                            </div>
+                                        );
+                                    })
+                                ) : (
+                                    <div>Không có sản phẩm nào.</div>
+                                )}
+                            </div>
+                        </div>
+                        <div style={{ marginBottom: 16, textAlign: 'right', fontWeight: 600, fontSize: 18 }}>
+                            Tổng tiền đơn hàng: <span style={{ color: '#e74c3c' }}>{detailOrder.totalPrice}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+                            <ButtonComponent
+                                onClick={handleCancelDetailDialog}
+                                size={40}
+                                styleButton={{
+                                    height: '36px',
+                                    border: '1px solid #FF5A57',
+                                    borderRadius: '4px'
+                                }}
+                                textbutton={'Đóng'}
+                                styletextbutton={{ color: '#FF5A57', fontSize: '14px' }}
                             ></ButtonComponent>
                         </div>
                     </div>
