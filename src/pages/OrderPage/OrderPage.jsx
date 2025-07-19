@@ -168,7 +168,13 @@ const OrderPage = () => {
         if (name && address && phone && city) {
             mutationUpdate.mutate({ id: user?.id, token: user?.access_token, ...stateUserDetails }, {
                 onSuccess: () => {
-                    dispatch(updateUser({ name, address, phone, city }))
+                    dispatch(updateUser({
+                        ...user,
+                        name,
+                        address,
+                        phone,
+                        city
+                    }))
                     setIsOpenModalUpdateInfo(false)
                 }
             })
