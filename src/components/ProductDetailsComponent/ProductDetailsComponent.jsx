@@ -59,9 +59,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
     useEffect(() => {
         if (order.isSucessOrder) {
             message.success('Đã thêm vào giỏ hàng')
-        }
-        return () => {
-            dispatch(resetOrder())
+            dispatch(resetOrder());
         }
     }, [order.isSucessOrder])
 

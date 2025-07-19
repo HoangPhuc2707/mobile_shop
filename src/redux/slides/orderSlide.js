@@ -31,10 +31,11 @@ export const orderSlide = createSlice({
           itemOrder.amount += orderItem?.amount
           state.isSucessOrder = true
           state.isErrorOrder = false
-
         }
       } else {
         state.orderItems.push(orderItem)
+        state.isSucessOrder = true
+        state.isErrorOrder = false
       }
     },
     resetOrder: (state) => {
