@@ -27,7 +27,7 @@ const SignInPage = () => {
     const { data, isPending, isSuccess } = mutation
 
     useEffect(() => {
-        if (isSuccess) {
+        if (isSuccess && data?.status !== 'ERR') {
             if (location?.state) {
                 navigate(location?.state)
             } else {
@@ -41,7 +41,7 @@ const SignInPage = () => {
                 }
             }
         }
-    }, [isSuccess])
+    }, [isSuccess, data])
 
     const handleGetDetailsUser = async (id, token) => {
         const res = await UserService.getDetailsUser(id, token)

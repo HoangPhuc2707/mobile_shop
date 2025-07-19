@@ -25,13 +25,13 @@ const SignUpPage = () => {
     const { data, isPending, isSuccess, isError } = mutation
 
     useEffect(() => {
-        if (isSuccess) {
+        if (isSuccess && data?.status !== 'ERR') {
             message.success()
             handleNavigateSignIn()
-        } else if (isError) {
+        } else if (isError || (isSuccess && data?.status === 'ERR')) {
             message.error()
         }
-    }, [isSuccess, isError])
+    }, [isSuccess, isError, data])
 
     const handleOnchangeEmail = (value) => {
         setEmail(value)
