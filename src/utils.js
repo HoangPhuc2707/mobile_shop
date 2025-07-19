@@ -100,3 +100,9 @@ export const convertDataChart = (data, type) => {
         return []
     }
 }
+
+export const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const d = new Date(dateString);
+    return d.toLocaleDateString('vi-VN');
+};

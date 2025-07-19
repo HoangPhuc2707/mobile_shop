@@ -7,7 +7,7 @@ import InputComponent from "../InputComponent/InputComponent";
 import { useSelector } from "react-redux";
 import * as OrderService from '../../services/OrderService';
 import { useQuery } from "@tanstack/react-query";
-import { convertPrice } from "../../utils";
+import { convertPrice, formatDate } from "../../utils";
 import { orderContant } from '../../contant'
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 
@@ -119,13 +119,7 @@ const OrderAdmin = () => {
             ...getColumnSearchProps('userName')
         },
         {
-            title: 'Số điện thoại',
-            dataIndex: 'phone',
-            sorter: (a, b) => a.phone.length - b.phone.length,
-            ...getColumnSearchProps('phone')
-        },
-        {
-            title: 'Địa chỉ',
+            title: 'Địa chỉ giao hàng',
             dataIndex: 'address',
             sorter: (a, b) => a.address.length - b.address.length,
             ...getColumnSearchProps('address')
@@ -171,15 +165,21 @@ const OrderAdmin = () => {
             )
         }
     ];
+
     const dataTable = orders?.data?.length && orders?.data?.map((order) => {
         return {
-            ...order, key: order._id, userName: order?.shippingAddress?.fullName,
-            phone: order?.shippingAddress?.phone, address: order?.shippingAddress?.address,
+            ...order,
+            key: order._id,
+            userName: order?.shippingAddress?.fullName,
+            phone: order?.shippingAddress?.phone,
+            address: order?.shippingAddress?.address,
             paymentMethod: orderContant.payment[order?.paymentMethod],
-            isPaid: order?.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán', isDelivered: order?.isDelivered ? 'Đã giao hàng' : 'Chưa giao hàng',
-            totalPrice: convertPrice(order?.totalPrice)
+            isPaid: order?.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán',
+            isDelivered: order?.isDelivered ? 'Đã giao hàng' : 'Chưa giao hàng',
+            totalPrice: convertPrice(order?.totalPrice),
+            createdAt: formatDate(order?.createdAt)
         }
-    })
+    });
 
     return (
         <div>

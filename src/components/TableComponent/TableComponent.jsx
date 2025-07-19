@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Loading from "../../components/LoadingComponent/Loading";
 import { Excel } from "antd-table-saveas-excel";
 import { useMemo } from 'react';
+import { ContainerTable } from "./style";
 
 const TableComponent = (props) => {
     const { selectionType = 'checkbox', data: dataSource = [], isPending = false, columns = [], handleDeleteMany } = props
@@ -59,16 +60,18 @@ const TableComponent = (props) => {
                 )}
                 <Button style={{ marginBottom: '10px' }} onClick={exportExcel}>Xuất file Excel</Button>
             </div>
-            <Table
-                rowSelection={{
-                    type: selectionType,
-                    ...rowSelection,
-                }}
-                columns={columns}
-                dataSource={dataSource}
-                // scroll={{ x: 1200 }}
-                {...props}
-            />
+            <ContainerTable>
+                <Table
+                    rowSelection={{
+                        type: selectionType,
+                        ...rowSelection,
+                    }}
+                    columns={columns}
+                    dataSource={dataSource}
+                    // scroll={{ x: 'max-content' }}
+                    {...props}
+                />
+            </ContainerTable>
         </Loading >
     );
 };

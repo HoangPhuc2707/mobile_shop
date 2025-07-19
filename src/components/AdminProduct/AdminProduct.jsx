@@ -4,7 +4,7 @@ import { SearchOutlined } from '@ant-design/icons'
 import { Button, Form, Select, Space } from "antd";
 import TableComponent from "../TableComponent/TableComponent";
 import InputComponent from "../InputComponent/InputComponent";
-import { getBase64, renderOptions } from "../../utils";
+import { formatDate, getBase64, renderOptions } from "../../utils";
 import * as ProductService from '../../services/ProductService';
 import { useMutationHooks } from "../../hooks/useMutationHook";
 import Loading from "../LoadingComponent/Loading";
@@ -300,13 +300,19 @@ const AdminProduct = () => {
             ...getColumnSearchProps('discount')
         },
         {
+            title: 'Ngày tạo',
+            dataIndex: 'createdAt',
+            sorter: (a, b) => a.createdAt - b.createdAt,
+            ...getColumnSearchProps('createdAt')
+        },
+        {
             title: 'Thao tác',
             dataIndex: 'action',
             render: renderAction
         },
     ];
     const dataTable = products?.data?.length && products?.data?.map((product) => {
-        return { ...product, key: product._id }
+        return { ...product, key: product._id, createdAt: formatDate(product?.createdAt) }
     })
 
     useEffect(() => {

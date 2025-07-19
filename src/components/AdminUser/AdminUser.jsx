@@ -7,7 +7,7 @@ import InputComponent from "../InputComponent/InputComponent";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
 import Loading from "../LoadingComponent/Loading";
 import ModalComponent from "../ModalComponent/ModalComponent";
-import { getBase64 } from "../../utils";
+import { formatDate, getBase64 } from "../../utils";
 import * as message from "../../components/Message/Message";
 import { useSelector } from "react-redux";
 import { useMutationHooks } from "../../hooks/useMutationHook";
@@ -215,16 +215,16 @@ const AdminUser = () => {
             ...getColumnSearchProps('email')
         },
         {
+            title: 'Địa chỉ',
+            dataIndex: 'address',
+            sorter: (a, b) => a.address.length - b.address.length,
+            ...getColumnSearchProps('address')
+        },
+        {
             title: 'Số điện thoại',
             dataIndex: 'phone',
             sorter: (a, b) => a.phone - b.phone,
             ...getColumnSearchProps('phone')
-        },
-        {
-            title: 'Ngày tạo',
-            dataIndex: 'createdAt',
-            sorter: (a, b) => a.createdAt - b.createdAt,
-            ...getColumnSearchProps('createdAt')
         },
         {
             title: 'Chức vụ',
@@ -241,13 +241,19 @@ const AdminUser = () => {
             ],
         },
         {
+            title: 'Ngày tạo',
+            dataIndex: 'createdAt',
+            sorter: (a, b) => a.createdAt - b.createdAt,
+            ...getColumnSearchProps('createdAt')
+        },
+        {
             title: 'Thao tác',
             dataIndex: 'action',
             render: renderAction
         },
     ];
     const dataTable = users?.data?.length && users?.data?.map((user) => {
-        return { ...user, key: user._id, isAdmin: user.isAdmin ? 'Quản lý' : 'Người dùng' }
+        return { ...user, key: user._id, isAdmin: user.isAdmin ? 'Quản lý' : 'Người dùng', createdAt: formatDate(user?.createdAt) }
     })
 
     useEffect(() => {
