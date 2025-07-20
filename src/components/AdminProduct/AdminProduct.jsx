@@ -248,6 +248,12 @@ const AdminProduct = () => {
             ...getColumnSearchProps('name')
         },
         {
+            title: 'Số lượng',
+            dataIndex: 'countInStock',
+            sorter: (a, b) => a.countInStock.length - b.countInStock.length,
+            ...getColumnSearchProps('countInStock')
+        },
+        {
             title: 'Giá',
             dataIndex: 'price',
             sorter: (a, b) => a.price - b.price,
