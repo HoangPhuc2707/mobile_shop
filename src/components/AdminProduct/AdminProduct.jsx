@@ -375,11 +375,29 @@ const AdminProduct = () => {
     }
 
     const handleDeleteProduct = () => {
-        mutationDeleted.mutate({ id: rowSelected, token: user?.access_token }, {
-            onSettled: () => {
-                queryProduct.refetch()
+        // Kiểm tra sản phẩm đã từng có trong đơn hàng chưa
+        const checkProductInOrder = async () => {
+            try {
+                const res = await fetch(`/api/order/check-product-in-order/${rowSelected}`);
+                const data = await res.json();
+                if (data?.exists) {
+                    // Nếu đã có trong đơn hàng thì hiện thông báo và không xóa
+                    message.error('Sản phẩm đã có trong đơn hàng trước đây, không thể xóa!');
+                    handleCancelDelete();
+                } else {
+                    // Nếu chưa có trong đơn hàng thì xóa bình thường
+                    mutationDeleted.mutate({ id: rowSelected, token: user?.access_token }, {
+                        onSettled: () => {
+                            queryProduct.refetch()
+                        }
+                    })
+                }
+            } catch (err) {
+                message.error('Lỗi kiểm tra sản phẩm trong đơn hàng!');
+                handleCancelDelete();
             }
-        })
+        };
+        checkProductInOrder();
     }
 
     const handleCancel = () => {

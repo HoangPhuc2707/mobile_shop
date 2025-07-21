@@ -31,6 +31,29 @@ const OrderPage = () => {
     const navigate = useNavigate()
     const [form] = Form.useForm();
     const dispatch = useDispatch()
+
+
+    // useEffect kiểm tra sản phẩm tồn tại trong hệ thống
+    useEffect(() => {
+        const fetchValidProducts = async () => {
+            try {
+                const res = await fetch('/api/product/get-all');
+                const data = await res.json();
+                if (data?.status === 'OK' && Array.isArray(data?.data)) {
+                    const validIds = data.data.map(p => String(p._id));
+                    // Lọc ra các sản phẩm không còn tồn tại
+                    const invalidOrderItems = order?.orderItems?.filter(item => !validIds.includes(String(item.product)));
+                    if (invalidOrderItems.length > 0) {
+                        dispatch(removeAllOrderProduct({ listChecked: invalidOrderItems.map(item => item.product) }));
+                    }
+                }
+            } catch {
+                console.error('Lỗi kiểm tra sản phẩm tồn tại');
+            }
+        };
+        fetchValidProducts();
+    }, [order?.orderItems, dispatch]);
+
     const onChange = (e) => {
         if (listChecked.includes(e.target.value)) {
             const newListChecked = listChecked.filter((item) => item !== e.target.value)
