@@ -1,22 +1,10 @@
 import React, { PureComponent } from 'react'
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { convertDataChart } from '../../utils';
 
 const PieChartComponent = (props) => {
   const data = convertDataChart(props.data, 'paymentMethod')
   const COLORS = ['rgb(110, 186, 252)', '#00C49F', '#FFBB28', '#FF8042'];
-
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index, ...rests }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-    return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -25,8 +13,7 @@ const PieChartComponent = (props) => {
           data={data}
           cx="50%"
           cy="50%"
-          labelLine={false}
-          label={renderCustomizedLabel}
+          label
           outerRadius={80}
           fill="#8884d8"
           dataKey="value"
@@ -35,7 +22,21 @@ const PieChartComponent = (props) => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip />
+        <Tooltip
+          contentStyle={{
+            backgroundColor: '#fff',
+            border: 'none',
+            borderRadius: '8px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+          }}
+        />
+        <Legend
+          wrapperStyle={{
+            fontSize: '12px',
+            fontFamily: 'Inter, sans-serif',
+            color: '#1a1a1a',
+          }}
+        />
       </PieChart>
     </ResponsiveContainer>
   )
