@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { WrapperHeader, WrapperUploadFile } from "./style";
+import { WrapperAction, WrapperHeader, WrapperUploadFile } from "./style";
 import { SearchOutlined } from '@ant-design/icons'
 import { Button, Form, Space } from "antd";
 import TableComponent from "../TableComponent/TableComponent";
@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 import { useMutationHooks } from "../../hooks/useMutationHook";
 import * as UserService from '../../services/UserService';
 import { useQuery } from "@tanstack/react-query";
+import icon_trash from '../../assets/images/icon-trash.png';
+import icon_edit from '../../assets/images/icon-edit.png';
 
 
 const AdminUser = () => {
@@ -127,11 +129,10 @@ const AdminUser = () => {
     const { isPending: isPendingUsers, data: users } = queryUser
     const renderAction = () => {
         return (
-            <div>
-                <span style={{ color: '#3498db', cursor: 'pointer', paddingRight: '5px' }} onClick={() => setIsModalOpenDelete(true)}>Xóa</span>
-                |
-                <span style={{ color: '#3498db', cursor: 'pointer', paddingLeft: '5px' }} onClick={handleDetailsUser}>Sửa</span>
-            </div>
+            <WrapperAction>
+                <img style={{ cursor: 'pointer', width: '24px', height: '24px' }} title="Delete" src={icon_trash} alt="icon_trash" onClick={() => setIsModalOpenDelete(true)} />
+                <img style={{ cursor: 'pointer', width: '22px', height: '22px', paddingTop: '3px' }} title="Edit" src={icon_edit} alt="icon_edit" onClick={handleDetailsUser} />
+            </WrapperAction>
         )
     }
 

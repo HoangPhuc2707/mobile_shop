@@ -20,3 +20,9 @@ export const WrapperUploadFile = styled(Upload)`
         align-items: center;
     }
 `
+export const WrapperAction = styled.div`
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+`

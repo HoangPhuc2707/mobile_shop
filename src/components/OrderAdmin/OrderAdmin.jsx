@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { WrapperHeader, } from "./style";
+import { WrapperAction, WrapperHeader, } from "./style";
 import { SearchOutlined } from '@ant-design/icons'
 import { Button, Space } from "antd";
 import TableComponent from "../TableComponent/TableComponent";
@@ -10,6 +10,8 @@ import { useQuery } from "@tanstack/react-query";
 import { convertPrice, formatDate } from "../../utils";
 import { orderContant } from '../../contant'
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
+import icon_view from '../../assets/images/icon-view.png';
+import icon_edit from '../../assets/images/icon-edit.png';
 
 const OrderAdmin = () => {
     const user = useSelector((state) => state?.user)
@@ -157,17 +159,10 @@ const OrderAdmin = () => {
             title: 'Thao tác',
             dataIndex: 'action',
             render: (_, record) => (
-                <div style={{ display: 'flex', gap: 12 }}>
-                    <span
-                        style={{ color: '#3498db', cursor: 'pointer', fontWeight: 500 }}
-                        onClick={() => handleShowDetail(record)}
-                    >Xem</span>
-                    |
-                    <span
-                        style={{ color: '#3498db', cursor: 'pointer', fontWeight: 500 }}
-                        onClick={() => handleApproveClick(record)}
-                    >Duyệt</span>
-                </div>
+                <WrapperAction>
+                    <img style={{ cursor: 'pointer', width: '20px', height: '20px' }} title="View" src={icon_view} alt="icon_view" onClick={() => handleShowDetail(record)} />
+                    <img style={{ cursor: 'pointer', width: '22px', height: '22px', paddingTop: '2px' }} title="Edit" src={icon_edit} alt="icon_edit" onClick={() => handleApproveClick(record)} />
+                </WrapperAction>
             )
         }
     ];
