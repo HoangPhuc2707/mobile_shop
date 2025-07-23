@@ -106,7 +106,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
 
     return (
         <Loading isPending={isPending}>
-            <Row style={{ padding: '16px', background: '#fff', borderRadius: '4px' }}>
+            <Row style={{ padding: '16px 16px 40px 16px', background: '#fff', borderRadius: '4px' }}>
                 <Col span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
                     <Image style={{ paddingLeft: '20px' }} src={productDetails?.image} alt="image product" preview={false} />
                     {/* <Row style={{ justifyContent: 'space-between', paddingTop: '10px', paddingLeft: '5px', paddingRight: '5px' }}>
@@ -147,7 +147,6 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         <span className='address'>{user?.address}</span>
                         <span className='change-address'>- Đổi địa chỉ</span>
                     </WrapperAddressProduct> */}
-                    <LikeButtonComponent dataHref={"https://developers.facebook.com/docs/plugins/"} />
                     <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
                         <div style={{ marginBottom: '10px' }}>Số lượng</div>
                         <WrapperQualityProduct>
@@ -180,7 +179,6 @@ const ProductDetailsComponent = ({ idProduct }) => {
 
                     </div>
                 </Col>
-                <CommentComponent dataHref={"https://developers.facebook.com/docs/plugins/comments#configurator"} width="1000" />
             </Row>
         </Loading>
     );
