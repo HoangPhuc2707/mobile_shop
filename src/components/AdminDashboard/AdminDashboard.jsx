@@ -171,12 +171,12 @@ const AdminDashboard = () => {
                         justifyContent: 'space-between',
                         flexWrap: 'wrap'
                     }}>
-                        <StatItem>
+                        {/* <StatItem>
                             <div>Tổng Doanh Thu</div>
                             <div style={{ fontSize: '24px', color: '#1677ff', fontWeight: 700 }}>
                                 {isPendingOrders ? <Spin /> : `${(totalRevenue / 1000000).toFixed(2)}M VND`}
                             </div>
-                        </StatItem>
+                        </StatItem> */}
                         <StatItem>
                             <div>Sản Phẩm Bán Chạy</div>
                             <div style={{ fontSize: '24px', color: '#00C49F', fontWeight: 700 }}>

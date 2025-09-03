@@ -203,7 +203,7 @@ const OrderAdmin = () => {
                     zIndex: 9999
                 }}>
                     <div style={{ background: '#fff', padding: 24, borderRadius: 8, minWidth: 320, boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
-                        <h3 style={{ margin: 0, marginBottom: 16 }}>Duyệt đơn hàng</h3>
+                        <h3 style={{ margin: 0, marginBottom: 16 }}>Trạng thái đơn hàng</h3>
                         <div style={{ marginBottom: 16 }}>
                             <label style={{ marginRight: 8 }}>
                                 <input type="checkbox" checked={isPaid} onChange={e => setIsPaid(e.target.checked)} /> Đã thanh toán
