@@ -42,7 +42,7 @@ export const WrapperNews = styled.div`
 `;
 
 export const HeaderNews = styled.div`
-  background-color: #f47920;
+  background: linear-gradient(138deg, #FF5A57, #E02F75);
   color: white;
   font-weight: bold;
   padding: 10px;
@@ -75,7 +75,7 @@ export const NewsTitle = styled.div`
   margin-bottom: 5px;
   cursor: pointer;
   &:hover{
-    color: #f18634;
+    color: #FF5A57;
     transition: 0.2s ease;
   }
 `;
@@ -97,7 +97,7 @@ export const WrapperSubMenuType = styled.div`
   cursor: pointer;
   color: #fff;
   &:hover {
-    background-color: #f18634;
+    background: linear-gradient(138deg, #FF5A57, #E02F75);
   }
   &:hover .subMenuType{
    display: block;
@@ -110,7 +110,7 @@ export const WrapperType = styled.div`
   cursor: pointer;
   color: #fff;
   &:hover {
-    background-color: #f18634;
+    background: linear-gradient(138deg, #FF5A57, #E02F75);
   }
 `
 
@@ -148,12 +148,12 @@ export const WrapperHeaderProduct = styled.div`
     margin-top: 10px;
     margin-left: 30px;
     margin-right: 30px;
-    border: 2px solid #cd1818;
+    border: 2px solid #FF5A57;
     border-radius: 5px;
 `
 
 export const HeaderProduct = styled.div`
-    background-color: #cd1818;
+    background-color: #FF5A57;
     color: white;
     font-weight: bold;
     padding: 10px;

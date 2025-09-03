@@ -31,6 +31,29 @@ const OrderPage = () => {
     const navigate = useNavigate()
     const [form] = Form.useForm();
     const dispatch = useDispatch()
+
+
+    // useEffect kiểm tra sản phẩm tồn tại trong hệ thống
+    useEffect(() => {
+        const fetchValidProducts = async () => {
+            try {
+                const res = await fetch('/api/product/get-all');
+                const data = await res.json();
+                if (data?.status === 'OK' && Array.isArray(data?.data)) {
+                    const validIds = data.data.map(p => String(p._id));
+                    // Lọc ra các sản phẩm không còn tồn tại
+                    const invalidOrderItems = order?.orderItems?.filter(item => !validIds.includes(String(item.product)));
+                    if (invalidOrderItems.length > 0) {
+                        dispatch(removeAllOrderProduct({ listChecked: invalidOrderItems.map(item => item.product) }));
+                    }
+                }
+            } catch {
+                console.error('Lỗi kiểm tra sản phẩm tồn tại');
+            }
+        };
+        fetchValidProducts();
+    }, [order?.orderItems, dispatch]);
+
     const onChange = (e) => {
         if (listChecked.includes(e.target.value)) {
             const newListChecked = listChecked.filter((item) => item !== e.target.value)
@@ -168,7 +191,13 @@ const OrderPage = () => {
         if (name && address && phone && city) {
             mutationUpdate.mutate({ id: user?.id, token: user?.access_token, ...stateUserDetails }, {
                 onSuccess: () => {
-                    dispatch(updateUser({ name, address, phone, city }))
+                    dispatch(updateUser({
+                        ...user,
+                        name,
+                        address,
+                        phone,
+                        city
+                    }))
                     setIsOpenModalUpdateInfo(false)
                 }
             })
@@ -287,7 +316,7 @@ const OrderPage = () => {
                             onClick={() => handleAddCard()}
                             size={40}
                             styleButton={{
-                                background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
+                                background: 'linear-gradient(138deg, #FF5A57, #E02F75)',
                                 height: '48px',
                                 width: '360px',
                                 border: 'none',

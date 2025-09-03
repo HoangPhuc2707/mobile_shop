@@ -59,9 +59,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
     useEffect(() => {
         if (order.isSucessOrder) {
             message.success('Đã thêm vào giỏ hàng')
-        }
-        return () => {
-            dispatch(resetOrder())
+            dispatch(resetOrder());
         }
     }, [order.isSucessOrder])
 
@@ -108,10 +106,10 @@ const ProductDetailsComponent = ({ idProduct }) => {
 
     return (
         <Loading isPending={isPending}>
-            <Row style={{ padding: '16px', background: '#fff', borderRadius: '4px' }}>
+            <Row style={{ padding: '16px 16px 40px 16px', background: '#fff', borderRadius: '4px' }}>
                 <Col span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
                     <Image style={{ paddingLeft: '20px' }} src={productDetails?.image} alt="image product" preview={false} />
-                    <Row style={{ justifyContent: 'space-between', paddingTop: '10px', paddingLeft: '5px', paddingRight: '5px' }}>
+                    {/* <Row style={{ justifyContent: 'space-between', paddingTop: '10px', paddingLeft: '5px', paddingRight: '5px' }}>
                         <WrapperStyleColImage span={4}>
                             <WrapperStyleImageSmall src={imageProductSmall1} alt="image product small" preview={false} />
                         </WrapperStyleColImage>
@@ -130,7 +128,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         <WrapperStyleColImage span={4}>
                             <WrapperStyleImageSmall src={imageProductSmall6} alt="image product small" preview={false} />
                         </WrapperStyleColImage>
-                    </Row>
+                    </Row> */}
                 </Col>
                 <Col span={14} style={{ paddingLeft: '10px' }}>
                     <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
@@ -149,7 +147,6 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         <span className='address'>{user?.address}</span>
                         <span className='change-address'>- Đổi địa chỉ</span>
                     </WrapperAddressProduct> */}
-                    <LikeButtonComponent dataHref={"https://developers.facebook.com/docs/plugins/"} />
                     <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
                         <div style={{ marginBottom: '10px' }}>Số lượng</div>
                         <WrapperQualityProduct>
@@ -167,7 +164,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             <ButtonComponent
                                 size={40}
                                 styleButton={{
-                                    background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
+                                    background: 'linear-gradient(138deg, #FF5A57, #E02F75)',
                                     height: '48px',
                                     width: '220px',
                                     border: 'none',
@@ -182,7 +179,6 @@ const ProductDetailsComponent = ({ idProduct }) => {
 
                     </div>
                 </Col>
-                <CommentComponent dataHref={"https://developers.facebook.com/docs/plugins/comments#configurator"} width="1000" />
             </Row>
         </Loading>
     );

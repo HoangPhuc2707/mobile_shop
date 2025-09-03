@@ -25,13 +25,13 @@ const SignUpPage = () => {
     const { data, isPending, isSuccess, isError } = mutation
 
     useEffect(() => {
-        if (isSuccess) {
+        if (isSuccess && data?.status !== 'ERR') {
             message.success()
             handleNavigateSignIn()
-        } else if (isError) {
+        } else if (isError || (isSuccess && data?.status === 'ERR')) {
             message.error()
         }
-    }, [isSuccess, isError])
+    }, [isSuccess, isError, data])
 
     const handleOnchangeEmail = (value) => {
         setEmail(value)
@@ -117,7 +117,7 @@ const SignUpPage = () => {
                             onClick={handleSignUp}
                             size={40}
                             styleButton={{
-                                background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
+                                background: 'linear-gradient(138deg, #FF5A57, #E02F75)',
                                 height: '48px',
                                 width: '100%',
                                 border: 'none',
@@ -132,7 +132,7 @@ const SignUpPage = () => {
                 </WrapperContainerLeft>
                 <WrapperContainerRight>
                     <Image src={imageLogin} preview={false} alt="image-login" height="203px" width="203px" />
-                    <h4>Mua sắm tại Phone Plaza</h4>
+                    <h4>Mua sắm tại Cell Plaza</h4>
                 </WrapperContainerRight>
             </div>
         </div>

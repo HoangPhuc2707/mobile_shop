@@ -1,18 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
-import { WrapperHeader, WrapperUploadFile } from "./style";
-import { DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
+import { useEffect, useRef, useState } from "react";
+import { WrapperAction, WrapperHeader, WrapperUploadFile } from "./style";
+import { SearchOutlined } from '@ant-design/icons'
 import { Button, Form, Space } from "antd";
 import TableComponent from "../TableComponent/TableComponent";
 import InputComponent from "../InputComponent/InputComponent";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
 import Loading from "../LoadingComponent/Loading";
 import ModalComponent from "../ModalComponent/ModalComponent";
-import { getBase64 } from "../../utils";
+import { formatDate, getBase64 } from "../../utils";
 import * as message from "../../components/Message/Message";
 import { useSelector } from "react-redux";
 import { useMutationHooks } from "../../hooks/useMutationHook";
 import * as UserService from '../../services/UserService';
 import { useQuery } from "@tanstack/react-query";
+import icon_trash from '../../assets/images/icon-trash.png';
+import icon_edit from '../../assets/images/icon-edit.png';
 
 
 const AdminUser = () => {
@@ -127,10 +129,10 @@ const AdminUser = () => {
     const { isPending: isPendingUsers, data: users } = queryUser
     const renderAction = () => {
         return (
-            <div>
-                <DeleteOutlined style={{ color: 'red', fontSize: '30px', cursor: 'pointer' }} onClick={() => setIsModalOpenDelete(true)} />
-                <EditOutlined style={{ color: 'orange', fontSize: '30px', cursor: 'pointer' }} onClick={handleDetailsUser} />
-            </div>
+            <WrapperAction>
+                <img style={{ cursor: 'pointer', width: '24px', height: '24px' }} title="Delete" src={icon_trash} alt="icon_trash" onClick={() => setIsModalOpenDelete(true)} />
+                <img style={{ cursor: 'pointer', width: '22px', height: '22px', paddingTop: '3px' }} title="Edit" src={icon_edit} alt="icon_edit" onClick={handleDetailsUser} />
+            </WrapperAction>
         )
     }
 
@@ -151,7 +153,7 @@ const AdminUser = () => {
             >
                 <InputComponent
                     ref={searchInput}
-                    placeholder={`Search ${dataIndex}`}
+                    placeholder={`Nhập ${dataIndex}`}
                     value={selectedKeys[0]}
                     onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                     onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -170,7 +172,7 @@ const AdminUser = () => {
                             width: 90,
                         }}
                     >
-                        Search
+                        Tìm kiếm
                     </Button>
                     <Button
                         onClick={() => clearFilters && handleReset(clearFilters)}
@@ -179,7 +181,7 @@ const AdminUser = () => {
                             width: 90,
                         }}
                     >
-                        Reset
+                        Xóa
                     </Button>
                 </Space>
             </div>
@@ -214,16 +216,16 @@ const AdminUser = () => {
             ...getColumnSearchProps('email')
         },
         {
+            title: 'Địa chỉ',
+            dataIndex: 'address',
+            sorter: (a, b) => a.address.length - b.address.length,
+            ...getColumnSearchProps('address')
+        },
+        {
             title: 'Số điện thoại',
             dataIndex: 'phone',
             sorter: (a, b) => a.phone - b.phone,
             ...getColumnSearchProps('phone')
-        },
-        {
-            title: 'Ngày tạo',
-            dataIndex: 'createdAt',
-            sorter: (a, b) => a.createdAt - b.createdAt,
-            ...getColumnSearchProps('createdAt')
         },
         {
             title: 'Chức vụ',
@@ -240,13 +242,19 @@ const AdminUser = () => {
             ],
         },
         {
+            title: 'Ngày tạo',
+            dataIndex: 'createdAt',
+            sorter: (a, b) => a.createdAt - b.createdAt,
+            ...getColumnSearchProps('createdAt')
+        },
+        {
             title: 'Thao tác',
             dataIndex: 'action',
             render: renderAction
         },
     ];
     const dataTable = users?.data?.length && users?.data?.map((user) => {
-        return { ...user, key: user._id, isAdmin: user.isAdmin ? 'Quản lý' : 'Người dùng' }
+        return { ...user, key: user._id, isAdmin: user.isAdmin ? 'Quản lý' : 'Người dùng', createdAt: formatDate(user?.createdAt) }
     })
 
     useEffect(() => {
@@ -388,16 +396,17 @@ const AdminUser = () => {
                             rules={[{ required: true, message: 'Please input your avatar!' }]}
                         >
                             <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
-                                <Button>Chọn file</Button>
                                 {stateUserDetails?.avatar && (
                                     <img src={stateUserDetails?.avatar} style={{
                                         height: '60px',
                                         width: '60px',
                                         borderRadius: '50%',
                                         objectFit: 'cover',
-                                        marginLeft: '20px'
+                                        marginLeft: '20px',
+                                        marginRight: '20px'
                                     }} alt="avatar" />
                                 )}
+                                <Button>Chọn file</Button>
                             </WrapperUploadFile>
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 20, span: 16 }}>

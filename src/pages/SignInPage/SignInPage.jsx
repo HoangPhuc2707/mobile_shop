@@ -27,7 +27,7 @@ const SignInPage = () => {
     const { data, isPending, isSuccess } = mutation
 
     useEffect(() => {
-        if (isSuccess) {
+        if (isSuccess && data?.status !== 'ERR') {
             if (location?.state) {
                 navigate(location?.state)
             } else {
@@ -41,7 +41,7 @@ const SignInPage = () => {
                 }
             }
         }
-    }, [isSuccess])
+    }, [isSuccess, data])
 
     const handleGetDetailsUser = async (id, token) => {
         const res = await UserService.getDetailsUser(id, token)
@@ -104,7 +104,7 @@ const SignInPage = () => {
                             onClick={handleSignIn}
                             size={40}
                             styleButton={{
-                                background: '-webkit-linear-gradient(top, #f59000, #fd6e1d)',
+                                background: 'linear-gradient(138deg, #FF5A57, #E02F75)',
                                 height: '48px',
                                 width: '100%',
                                 border: 'none',
@@ -115,12 +115,12 @@ const SignInPage = () => {
                             styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </Loading>
-                    <p><WrapperTextLight>Quên mật khẩu?</WrapperTextLight></p>
+                    {/* <p><WrapperTextLight>Quên mật khẩu?</WrapperTextLight></p> */}
                     <p>Chưa có tài khoản? <WrapperTextLight onClick={handleNavigateSignUp}>Tạo tài khoản</WrapperTextLight></p>
                 </WrapperContainerLeft>
                 <WrapperContainerRight>
                     <Image src={imageLogin} preview={false} alt="image-login" height="203px" width="203px" />
-                    <h4>Mua sắm tại Phone Plaza</h4>
+                    <h4>Mua sắm tại Cell Plaza</h4>
                 </WrapperContainerRight>
             </div>
         </div>

@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import { WrapperHeader, WrapperUploadFile } from "./style";
-import { PlusOutlined, DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
+import { useEffect, useRef, useState } from "react";
+import { WrapperAction, WrapperHeader, WrapperUploadFile } from "./style";
+import { SearchOutlined } from '@ant-design/icons'
 import { Button, Form, Select, Space } from "antd";
 import TableComponent from "../TableComponent/TableComponent";
 import InputComponent from "../InputComponent/InputComponent";
-import { getBase64, renderOptions } from "../../utils";
+import { formatDate, getBase64, renderOptions } from "../../utils";
 import * as ProductService from '../../services/ProductService';
 import { useMutationHooks } from "../../hooks/useMutationHook";
 import Loading from "../LoadingComponent/Loading";
@@ -13,6 +13,8 @@ import { useQuery } from "@tanstack/react-query";
 import DrawerComponent from "../DrawerComponent/DrawerComponent";
 import ModalComponent from "../ModalComponent/ModalComponent";
 import { useSelector } from "react-redux";
+import icon_trash from '../../assets/images/icon-trash.png';
+import icon_edit from '../../assets/images/icon-edit.png';
 
 const AdminProduct = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -166,10 +168,10 @@ const AdminProduct = () => {
     const { isPending: isPendingProducts, data: products } = queryProduct
     const renderAction = () => {
         return (
-            <div>
-                <DeleteOutlined style={{ color: 'red', fontSize: '30px', cursor: 'pointer' }} onClick={() => setIsModalOpenDelete(true)} />
-                <EditOutlined style={{ color: 'orange', fontSize: '30px', cursor: 'pointer' }} onClick={handleDetailsProduct} />
-            </div>
+            <WrapperAction>
+                <img style={{ cursor: 'pointer', width: '24px', height: '24px' }} title="Delete" src={icon_trash} alt="icon_trash" onClick={() => setIsModalOpenDelete(true)} />
+                <img style={{ cursor: 'pointer', width: '22px', height: '22px', paddingTop: '3px' }} title="Edit" src={icon_edit} alt="icon_edit" onClick={handleDetailsProduct} />
+            </WrapperAction>
         )
     }
 
@@ -190,7 +192,7 @@ const AdminProduct = () => {
             >
                 <InputComponent
                     ref={searchInput}
-                    placeholder={`Search ${dataIndex}`}
+                    placeholder={`Nhập ${dataIndex}`}
                     value={selectedKeys[0]}
                     onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                     onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -247,6 +249,12 @@ const AdminProduct = () => {
             ...getColumnSearchProps('name')
         },
         {
+            title: 'Số lượng',
+            dataIndex: 'countInStock',
+            sorter: (a, b) => a.countInStock.length - b.countInStock.length,
+            ...getColumnSearchProps('countInStock')
+        },
+        {
             title: 'Giá',
             dataIndex: 'price',
             sorter: (a, b) => a.price - b.price,
@@ -299,13 +307,19 @@ const AdminProduct = () => {
             ...getColumnSearchProps('discount')
         },
         {
+            title: 'Ngày tạo',
+            dataIndex: 'createdAt',
+            sorter: (a, b) => a.createdAt - b.createdAt,
+            ...getColumnSearchProps('createdAt')
+        },
+        {
             title: 'Thao tác',
             dataIndex: 'action',
             render: renderAction
         },
     ];
     const dataTable = products?.data?.length && products?.data?.map((product) => {
-        return { ...product, key: product._id }
+        return { ...product, key: product._id, createdAt: formatDate(product?.createdAt) }
     })
 
     useEffect(() => {
@@ -362,11 +376,29 @@ const AdminProduct = () => {
     }
 
     const handleDeleteProduct = () => {
-        mutationDeleted.mutate({ id: rowSelected, token: user?.access_token }, {
-            onSettled: () => {
-                queryProduct.refetch()
+        // Kiểm tra sản phẩm đã từng có trong đơn hàng chưa
+        const checkProductInOrder = async () => {
+            try {
+                const res = await fetch(`/api/order/check-product-in-order/${rowSelected}`);
+                const data = await res.json();
+                if (data?.exists) {
+                    // Nếu đã có trong đơn hàng thì hiện thông báo và không xóa
+                    message.error('Sản phẩm đã có trong đơn hàng trước đây, không thể xóa!');
+                    handleCancelDelete();
+                } else {
+                    // Nếu chưa có trong đơn hàng thì xóa bình thường
+                    mutationDeleted.mutate({ id: rowSelected, token: user?.access_token }, {
+                        onSettled: () => {
+                            queryProduct.refetch()
+                        }
+                    })
+                }
+            } catch (err) {
+                message.error('Lỗi kiểm tra sản phẩm trong đơn hàng!');
+                handleCancelDelete();
             }
-        })
+        };
+        checkProductInOrder();
     }
 
     const handleCancel = () => {
@@ -627,16 +659,18 @@ const AdminProduct = () => {
                             rules={[{ required: true, message: 'Vui lòng chọn hình ảnh' }]}
                         >
                             <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
-                                <Button>Chọn file</Button>
                                 {stateProductDetails?.image && (
                                     <img src={stateProductDetails?.image} style={{
                                         height: '60px',
                                         width: '60px',
-                                        borderRadius: '50%',
+                                        border: '1px solid #ccc',
+                                        borderRadius: '3px',
                                         objectFit: 'cover',
-                                        marginLeft: '20px'
+                                        marginLeft: '20px',
+                                        marginRight: '20px'
                                     }} alt="avatar" />
                                 )}
+                                <Button>Chọn file</Button>
                             </WrapperUploadFile>
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 20, span: 16 }}>

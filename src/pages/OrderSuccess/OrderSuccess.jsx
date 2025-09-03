@@ -3,14 +3,16 @@ import { Lable, WrapperInfo, WrapperContainer, WrapperValue, WrapperItemOrderInf
 import { useSelector } from "react-redux";
 import { convertPrice } from "../../utils";
 import Loading from "../../components/LoadingComponent/Loading";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { orderContant } from "../../contant";
 import iconsuccess from '../../assets/images/icons8-success-50.png';
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 
 const OrderSuccess = () => {
     const order = useSelector((state) => state.order)
     const location = useLocation()
     const { state } = location
+    const navigate = useNavigate()
     return (
         <div style={{ background: '#f5f5fa', with: '100%', height: '100vh' }}>
             <Loading isPending={false}>
@@ -28,7 +30,7 @@ const OrderSuccess = () => {
                                 <div>
                                     <Lable>Phương thức giao hàng</Lable>
                                     <WrapperValue>
-                                        <span style={{ color: '#ea8500', fontWeight: 'bold' }}>{orderContant.delivery[state?.delivery]}</span> Giao hàng tiết kiệm
+                                        <span style={{ color: '#FF5A57', fontWeight: 'bold' }}>{orderContant.delivery[state?.delivery]}</span> Giao hàng tiết kiệm
                                     </WrapperValue>
                                 </div>
                             </WrapperInfo>
@@ -67,6 +69,19 @@ const OrderSuccess = () => {
                                 })}
                                 <div>
                                     <span style={{ marginTop: '4px', fontSize: '13px', color: '#242424', float: 'right', marginRight: '40px', color: 'red' }}>Tổng tiền: {convertPrice(state?.totalPriceMemo)}</span>
+                                </div>
+                                <div>
+                                    <ButtonComponent
+                                        size={40}
+                                        styleButton={{
+                                            height: '36px',
+                                            border: '1px solid #FF5A57',
+                                            borderRadius: '4px'
+                                        }}
+                                        onClick={() => navigate('/')}
+                                        textbutton={'Trở về trang chủ'}
+                                        styletextbutton={{ color: '#FF5A57', fontSize: '14px' }}
+                                    ></ButtonComponent>
                                 </div>
                             </WrapperItemOrderInfo>
                         </WrapperContainer>

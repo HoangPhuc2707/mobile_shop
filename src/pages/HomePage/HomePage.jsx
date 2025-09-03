@@ -7,11 +7,11 @@ import iconMenu3 from '../../assets/images/icons8-sort-down-24.png';
 import iconMenu4 from '../../assets/images/icons8-news-30.png';
 import imagebanner from '../../assets/images/banner-image.png';
 import imageNews1 from '../../assets/images/samsung-galaxy-z-flip6-didongmy.jpg';
-import imageNews2 from '../../assets/images/thumuasac.jpg';
-import slider1 from '../../assets/images/slider1.png';
-import slider2 from '../../assets/images/slider2.png';
-import slider3 from '../../assets/images/slider3.png';
-import slider4 from '../../assets/images/slider4.png';
+import imageNews2 from '../../assets/images/listnews3.png';
+import slider1 from '../../assets/images/slider1.webp';
+import slider2 from '../../assets/images/slider2.webp';
+import slider3 from '../../assets/images/slider3.webp';
+import slider4 from '../../assets/images/slider4.webp';
 import iconPlash from '../../assets/images/icons8-flash-48.png';
 import imagePromotion from '../../assets/images/promotion.jpg';
 import imgfeature1 from '../../assets/images/truck.svg';
@@ -122,10 +122,10 @@ const HomePage = () => {
                     <h2 style={{ marginTop: '75px', fontSize: '48px' }}>
                         <span>Chất Lượng Đỉnh Cao,</span>
                         <br />
-                        <span style={{ color: 'rgb(241, 134, 52)' }}>Giá Cả Hợp Lý!</span>
+                        <span style={{ color: '#FF5A57' }}>Giá Cả Hợp Lý!</span>
                     </h2>
                     <p style={{ color: 'gray' }}>
-                        Tại Phone Plaza, chúng tôi mang đến cho bạn những sản phẩm điện thoại tốt nhất với
+                        Tại Cell Plaza, chúng tôi mang đến cho bạn những sản phẩm điện thoại tốt nhất với
                         mức giá cạnh tranh. Khám phá ngay bộ sưu tập đa dạng và tìm kiếm chiếc điện thoại
                         hoàn hảo cho bạn!
                     </p>
@@ -153,14 +153,14 @@ const HomePage = () => {
                                 <NewsImage onClick={handleNavigateNews} src={imageNews1} alt="News 1" />
                                 <NewsContent>
                                     <NewsTitle onClick={handleNavigateNews}>Mua Samsung Galaxy Z Fold6 và Z Flip6 ở đâu?</NewsTitle>
-                                    <NewsDate>10/04/2024</NewsDate>
+                                    <NewsDate>10/04/2025</NewsDate>
                                 </NewsContent>
                             </NewsItem>
                             <NewsItem>
                                 <NewsImage onClick={handleNavigateNews} src={imageNews2} alt="News 2" />
                                 <NewsContent>
-                                    <NewsTitle onClick={handleNavigateNews}>Thu sạc cũ đổi sạc mới, tiết kiệm tới 500.000đ</NewsTitle>
-                                    <NewsDate>09/19/2024</NewsDate>
+                                    <NewsTitle onClick={handleNavigateNews}>MUA SẮM CUỐI TUẦN - TƯNG BỪNG HÀNG RẺ</NewsTitle>
+                                    <NewsDate>05/02/2025</NewsDate>
                                 </NewsContent>
                             </NewsItem>
                         </WrapperNews>
@@ -241,8 +241,8 @@ const HomePage = () => {
                                 textbutton={isPreviousData ? 'Load More' : 'Xem Thêm'}
                                 type="outline"
                                 styleButton={{
-                                    border: '1px solid #cd1818',
-                                    background: '#cd1818',
+                                    border: 'none',
+                                    background: 'linear-gradient(138deg, #FF5A57, #E02F75)',
                                     color: `${products?.total === products?.data?.length ? '#ccc' : '#fff'}`,
                                     width: '140px', height: '38px', borderRadius: '4px'
                                 }}
